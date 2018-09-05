@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('contents.dashboard');
-});
+Route::get('/Administracion', 'Application\Administracion\ControlFacturacionController@index' );
