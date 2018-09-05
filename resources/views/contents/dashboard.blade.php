@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.Application.master')
 
 @section('content')
 <div class="right_col" role="main">
