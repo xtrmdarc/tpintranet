@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('contents.dashboard');
 });
