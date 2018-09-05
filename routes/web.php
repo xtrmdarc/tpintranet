@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+    
 Route::get('/Administracion', 'Application\Administracion\ControlFacturacionController@index' );
 
 Route::get('/Produccion','Application\Produccion\ControlProduccionController@index');
