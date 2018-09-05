@@ -85,7 +85,6 @@
         </ul>
       </div>
     </div>
-    
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
@@ -598,9 +597,7 @@
         </div>
       </footer>
     </div>
-
   </div>
-
   <!--   Core JS Files   -->
   <script src="js/core/jquery.min.js" type="text/javascript"></script>
   <script src="js/core/popper.min.js" type="text/javascript"></script>
