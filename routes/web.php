@@ -16,3 +16,5 @@ Route::get('/Administracion', 'Application\Administracion\ControlFacturacionCont
 Route::get('/Produccion','Application\Produccion\ControlProduccionController@index');
 
 Route::get('/InicioSesion','Application\Sistema\InicioSesionController@index');
+
+Route::get('/EditorUsuario','Application\Sistema\AjusteUsuariosController@index');
