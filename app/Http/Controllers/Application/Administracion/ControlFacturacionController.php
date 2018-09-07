@@ -10,6 +10,10 @@ class ControlFacturacionController extends Controller
     //
     public function index()
     {
-        return view('contents.dashboard');
+        return view('contents.Application.Administracion.control_facturacion');
+    }
+
+    public function cargarServiciosPrincipal(){
+        
     }
 }
