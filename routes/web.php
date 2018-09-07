@@ -16,3 +16,10 @@ Route::get('/Administracion', 'Application\Administracion\ControlFacturacionCont
 Route::get('/Produccion','Application\Produccion\ControlProduccionController@index');
 
 Route::get('/InicioSesion','Application\Sistema\InicioSesionController@index');
+
+Route::get('/RegistroUsuario','Application\Sistema\RegistroUsuarioController@index');
+
+Route::prefix('Sistema')->group(function(){
+    Route::get('CargaServicios','Application\Sistema\CargaServiciosController@index');
+    Route::post('CargarServiciosRequest', 'Application\Sistema\CargaServiciosController@cargarServiciosPrincipal');
+});
