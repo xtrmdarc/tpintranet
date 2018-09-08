@@ -27,7 +27,6 @@ class CargaServiciosController extends Controller
             {
                 $q = DB::select('select * from usuario where active = ?', [1]);
                 dd($q);
-                
             }
             
             

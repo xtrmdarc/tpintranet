@@ -17,13 +17,10 @@ Route::get('/Produccion','Application\Produccion\ControlProduccionController@ind
 
 Route::get('/InicioSesion','Application\Sistema\InicioSesionController@index');
 
-<<<<<<< HEAD
 Route::get('/EditorUsuario','Application\Sistema\AjusteUsuariosController@index');
-=======
 Route::get('/RegistroUsuario','Application\Sistema\RegistroUsuarioController@index');
 
 Route::prefix('Sistema')->group(function(){
     Route::get('CargaServicios','Application\Sistema\CargaServiciosController@index');
     Route::post('CargarServiciosRequest', 'Application\Sistema\CargaServiciosController@cargarServiciosPrincipal');
 });
->>>>>>> 2562309cb8720590d27938351be7636f9b995370
