@@ -12,8 +12,5 @@ class ControlFacturacionController extends Controller
     {
         return view('contents.Application.Administracion.control_facturacion');
     }
-
-    public function cargarServiciosPrincipal(){
-        
-    }
+    
 }
