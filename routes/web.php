@@ -18,7 +18,8 @@ Route::get('/Produccion','Application\Produccion\ControlProduccionController@ind
 Route::get('/InicioSesion','Application\Sistema\InicioSesionController@index');
 
 Route::get('/EditorUsuario','Application\Sistema\AjusteUsuariosController@index');
-Route::get('/RegistroUsuario','Application\Sistema\RegistroUsuarioController@index');
+Route::post('/RegistroUsuarioRequest','Application\Sistema\AjusteUsuariosController@RegistroUsuarioRequest');
+
 
 Route::prefix('Sistema')->group(function(){
     Route::get('CargaServicios','Application\Sistema\CargaServiciosController@index');

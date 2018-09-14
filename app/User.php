@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
+    
     use Notifiable;
 
     /**
@@ -15,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','dni', 'lastname',
     ];
 
     /**
@@ -26,4 +28,26 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isValid($data)
+    {
+        $rules = array(
+            'email'     => 'required|email|unique:users',
+            'name' => 'required|min:3|max:80',
+            'password'  => 'required|min:8|confirmed',
+            'lastname' => 'required|min:4|max:80',
+            'dni' => 'required|length:9',
+        );
+        
+        $validator = Validator::make($data, $rules);
+        
+        if ($validator->passes())
+        {
+            return true;
+        }
+        
+        $this->errors = $validator->errors();
+        
+        return false;
+    }
 }
