@@ -13,4 +13,9 @@ class AjusteUsuariosController extends Controller
     {
         return view ('contents.application.sistema.editorusuarios');
     }
+
+    public function cargasistemausuario()
+    {
+        
+    }
 }
