@@ -9,10 +9,12 @@ $(function(){
             });
 
             this.on("success", function(response) { 
+                console.log(response);
                 $("#mdl-carga-servicios-title").text('Carga completada con éxito');
                 $("#respuesta_servicios_success").css('display','block');
                 $("#servicios_carga_loader").css('display','none');
                 $("#id_carga").val(response.carga_id);
+                $("#servicios_cargados_txt").text(response.numFilas);
             });
         }
 
