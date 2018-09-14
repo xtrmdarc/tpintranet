@@ -13,6 +13,7 @@
     
 Route::get('/Administracion', 'Application\Administracion\ControlFacturacionController@index' );
 
+
 Route::get('/Produccion','Application\Produccion\ControlProduccionController@index');
 
 Route::get('/InicioSesion','Application\Sistema\InicioSesionController@index');
@@ -24,4 +25,5 @@ Route::post('/RegistroUsuarioRequest','Application\Sistema\AjusteUsuariosControl
 Route::prefix('Sistema')->group(function(){
     Route::get('CargaServicios','Application\Sistema\CargaServiciosController@index');
     Route::post('CargarServiciosRequest', 'Application\Sistema\CargaServiciosController@cargarServiciosPrincipal');
+    Route::post('CargaFinProceso','Application\Sistema\CargaServiciosController@GuardarCargaNombre');
 });
