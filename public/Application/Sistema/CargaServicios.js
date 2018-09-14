@@ -8,7 +8,7 @@ $(function(){
                 $('#mdl-carga-servicios').modal('show');
             });
 
-            this.on("success", function(response) { 
+            this.on("success", function(file,response) { 
                 console.log(response);
                 $("#mdl-carga-servicios-title").text('Carga completada con éxito');
                 $("#respuesta_servicios_success").css('display','block');
