@@ -29,6 +29,10 @@
 
     <!-- Custom Theme Style -->
     <link href="{{URL::to('build/css/custom.min.css')}}" rel="stylesheet">
+
+    <!-- bootstrap-datetimepicker -->
+    <link href="{{URL::to('bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet">
+
   </head>
 
   <body class="nav-md">
@@ -263,9 +267,13 @@
     <!-- bootstrap-daterangepicker -->
     <script src="{{URL::to('moment/min/moment.min.js')}}"></script>
     <script src="{{URL::to('bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+    <!-- validator -->
+    <script src="{{URL::to('validator/validator.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="{{URL::to('build/js/custom.min.js')}}"></script>
+    
+    @yield("scripts")
 	
   </body>
 </html>
