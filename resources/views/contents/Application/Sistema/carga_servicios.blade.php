@@ -81,7 +81,7 @@
     </div>
   </div>
   
-  <div id="mdl-carga-servicios" class="modal fade" tabindex="-1" role="dialog">
+  <div id="mdl-carga-servicios" class="modal fade" tabindex="-1" role="dialog"  data-backdrop="static" data-keyboard="false">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -94,26 +94,9 @@
               <div class="col-sm-12">
                 <div id="servicios_carga_loader" class="loader text-center" style="display:block;margin-left:auto;margin-right:auto;"></div>
                 
-                <div id="respuesta_servicios_success" style="display:none;">
-                  <form id="frm_guardar_carga" method="POST" action="/Sistema/GuardarCarga">
-                    <input id="id_carga" name="id_carga" type="hidden" value="" >
-                    @csrf
-                    <div class="form-group " >
-                    
-                        <label class="col-form-label">Servicios cargados</label>
-                        <p class="form-control-static text-center text-primary" id="servicios_cargados_txt" style="font-size:1.9em;"  >1231</p>
-                      
-                    </div>
-                    <div class="form-group" >
-                        <label  for="nombre_carga">Nombre de carga</label>
-                        <input type="text" class="form-control" id="nombre_carga" placeholder="Ingrese nombre"> 
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width:100%;margin-top:15px;" >GUARDAR</button>
-
-                  </form>
-                </div>  
+                <div id="respuesta_servicios" style="display:none;"> 
                 
-                
+                </div> 
               </div>
             </div>
 

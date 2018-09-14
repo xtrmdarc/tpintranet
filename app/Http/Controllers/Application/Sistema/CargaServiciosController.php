@@ -271,8 +271,8 @@ class CargaServiciosController extends Controller
     public function GuardarCargaNombre(Request $request){
         
         $data = $request->all();
-        DB::table('Carga')->where('IdCarga',$data['id_carga'])->update(['DescCarga',$data['nombre_carga']]);
-
+        DB::table('Carga')->where('IdCarga',$data['id_carga'])->update(['DescCarga'=>$data['nombre_carga']]);
+        echo 'hola termino';
     }
 
 }
