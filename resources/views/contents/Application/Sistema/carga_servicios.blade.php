@@ -1,9 +1,27 @@
 @extends('layouts.Application.master')
 
 @section('content')
+
+<style>
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
 <link href="{{URL::to('dropzone/dist/min/dropzone.min.css')}}" rel="stylesheet">
     <!-- page content -->
-<div class="right_col" role="main">
+  <div class="right_col" role="main">
+
     <div class="">
       <div class="page-title">
         <div class="title_left">
@@ -48,7 +66,7 @@
             </div>
             <div class="x_content">
               <p>Drag multiple files to the box below for multi upload or click to select files. This is for demonstration purposes only, the files are not uploaded to any server.</p>
-              <form action="/Sistema/CargarServiciosRequest" class="dropzone">
+              <form action="/Sistema/CargarServiciosRequest" class="dropzone" id="dzCargarServicios">
                   @csrf
                   <div class="dz-message">Arrastre el archivo de servicios hasta aquí para subirlo al servidor o haga click aquí.</div>
               </form>
@@ -62,7 +80,53 @@
       </div>
     </div>
   </div>
-  <!-- /page content -->
+  
+  <div id="mdl-carga-servicios" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="mdl-carga-servicios-title">Esto podría tomar tiempo..</h4>
+            
+          </div>
+          <div class="modal-body">
 
+            <div class="row">
+              <div class="col-sm-12">
+                <div id="servicios_carga_loader" class="loader text-center" style="display:block;margin-left:auto;margin-right:auto;"></div>
+                
+                <div id="respuesta_servicios_success" style="display:none;">
+                  <form id="frm_guardar_carga" method="POST" action="/Sistema/GuardarCarga">
+                    <input id="id_carga" name="id_carga" type="hidden" value="" >
+                    @csrf
+                    <div class="form-group " >
+                    
+                        <label class="col-form-label">Servicios cargados</label>
+                        <p class="form-control-static text-center text-primary" id="servicios_cargados_txt" style="font-size:1.9em;"  >1231</p>
+                      
+                    </div>
+                    <div class="form-group" >
+                        <label  for="nombre_carga">Nombre de carga</label>
+                        <input type="text" class="form-control" id="nombre_carga" placeholder="Ingrese nombre"> 
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;margin-top:15px;" >GUARDAR</button>
+
+                  </form>
+                </div>  
+                
+                
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+  <!-- /page content -->
+@endsection
+
+@section('scripts')
   <script src="{{URL::to('dropzone/dist/min/dropzone.min.js')}}"></script>
+  <script src="{{URL::to('Application/Sistema/CargaServicios.js')}}"></script>
 @endsection
