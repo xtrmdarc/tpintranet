@@ -11,3 +11,18 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.btn-text-non-selected{
+    color: #999;
+    background: none;
+    border: none;
+}
+
+.btn-text-selected{
+    color: white;
+    background: green;
+    border: none;
+    border-radius: 4em;
+    padding: 3px 10px 3px 10px;
+    
+}

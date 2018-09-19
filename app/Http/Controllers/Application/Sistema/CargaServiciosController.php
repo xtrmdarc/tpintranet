@@ -243,6 +243,7 @@ class CargaServiciosController extends Controller
                             //NumFactura => ,
                             //IdFactura,
                             'IdCarga' => $id_carga,
+                            'IdEmpresa'=>$id_empresa,
                             'EsContado' => $esContado?true:false,
                             'EsCredito' => $esContado?false:true
                         ];

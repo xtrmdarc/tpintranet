@@ -33,6 +33,7 @@
     <!-- bootstrap-datetimepicker -->
     <link href="{{URL::to('bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet">
 
+    <link href="{{URL::to('Application/app.css')}}" rel="stylesheet">
   </head>
 
   <body class="nav-md">

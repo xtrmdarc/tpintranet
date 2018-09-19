@@ -6,6 +6,10 @@
         Route::get('CargaServicios','Application\Sistema\CargaServiciosController@index');
         Route::post('CargarServiciosRequest', 'Application\Sistema\CargaServiciosController@cargarServiciosPrincipal');
         Route::post('CargaFinProceso','Application\Sistema\CargaServiciosController@GuardarCargaNombre');
+
+        //Servicios
+        Route::get('Servicios','Application\Sistema\ServiciosController@index');
+        Route::post('AsignarEmpresaServicio','Application\Sistema\ServiciosController@setEmpresaServicio');
     });
 
 ?>

@@ -45,7 +45,7 @@ $(function(){
                             
                         </div>
                         <div class="form-group" >
-                            <label  for="nombre_carga">Nombre de carga</label>
+                            <label  for="nombre_carga">Carga</label>
                             <p class="form-control-static " > El archivo de carga no posee ningun servicio nuevo. </p>
                         </div>
                         <button type="button" class="btn btn-primary" style="width:100%;margin-top:15px; " data-dismiss="modal" >CERRAR</button>`
@@ -69,6 +69,8 @@ function modalCargaSetup(){
     $("#servicios_carga_loader").css('display','block');
     $("#mdl-carga-servicios-title").text('Esto podría tomar tiempo..');
 }
+
+
 /*
 $('#frm_guardar_carga').on('submit',function(e){
     e.preventDefault();
