@@ -12,6 +12,7 @@
 */
 
 include 'Application/sistema_routes.php';
+include 'Application/administracion_routes.php';
     
 Route::get('/Administracion', 'Application\Administracion\ControlFacturacionController@index' );
 

@@ -40,13 +40,14 @@ class CargaServiciosController extends Controller
                         
                         date_default_timezone_set('America/Lima');
                         setlocale(LC_ALL,"es_ES@euro","es_ES","esp");
+
                         $fecha_carga = date("Y-m-d H:i:s");
                         
                         $esContado = false;
-
-
+                        
+                        
                         //Variables de tabla servicio
-                        $fechaServicio = date('Y-m-d', strtotime(trim($emapData[2])));
+                        $fechaServicio = date('Y-m-d', strtotime(trim(str_replace('/','-',$emapData[2]))));
                         $horaProgramada = date('H:i:s',strtotime(trim($emapData[3])));
 
                         $montContado = $emapData[14];
@@ -61,14 +62,22 @@ class CargaServiciosController extends Controller
                         //basado en minutos
                         $TiempoEspera= $emapData[38];
                         //Cast to correct datetime format
-                        $FechaRegistroServicio= date('Y-m-d H:i:s',strtotime(trim($emapData[39])));
+                        //dd(date_create_from_format('d/m/y H:i',trim(' 30/07/18 17:47 ')));
+                        //dd(date('Y-m-d H:i:s',strtotime(trim(str_replace('/','-',' 30/07/18 17:47 ')))));
+                        //dd($emapData[39],trim($emapData[39]),strtotime(trim($emapData[39])),date('Y-m-d H:i:s',strtotime(trim($emapData[39]))));
+                        //echo date_create_from_format('d/m/y H:i',trim($emapData[39]));
+                        $FechaRegistroServicio= date('Y-m-d H:i:s',date_create_from_format('d/m/y H:i',trim($emapData[39]))->getTimestamp());
+                        //date('Y-m-d H:i:s',strtotime(trim(str_replace('/','-',$emapData[39]))));
+                        
                         //---
                         $HoraLlegadaVehiculo= date('H:i:s',strtotime(trim($emapData[40])));
                         $HoraInicioServicio= date('H:i:s',strtotime(trim($emapData[41])));
+                        
                         $HoraFinServicio= date('H:i:s',strtotime(trim($emapData[42])));
+                       
                         $dirOrigen  =  $emapData[43];
                         $dirFin = $emapData[44];
-
+                    
                         $id_cliente = 0;
                         $id_usuario = 0;
                         $id_conductor = 0;
@@ -208,7 +217,7 @@ class CargaServiciosController extends Controller
 
                         if($id_carga == 0)
                         $id_carga = DB::table('Carga')->insertGetId(['FechaCarga'=>$fecha_carga]);
-
+                        
                         $servicios_val_arr = [
                             'IdServicio' => $id_servicio,
                             'FechaServicio' => $fechaServicio,
@@ -247,10 +256,11 @@ class CargaServiciosController extends Controller
                             'EsContado' => $esContado?true:false,
                             'EsCredito' => $esContado?false:true
                         ];
+                        //dd($servicios_val_arr);
                         
                         DB::table('Servicio')->insert($servicios_val_arr);           
                         $cont++;
-                        
+                        //dd('inserta?');
                     }
                 }
 
@@ -263,7 +273,7 @@ class CargaServiciosController extends Controller
 
         }
         catch(Exception $ex){
-            return 'Exception =>  '. $e->getMessage();
+            dd($ex);
         }
 
                 
