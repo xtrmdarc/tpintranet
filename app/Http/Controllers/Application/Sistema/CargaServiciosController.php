@@ -47,7 +47,8 @@ class CargaServiciosController extends Controller
                         
                         
                         //Variables de tabla servicio
-                        $fechaServicio = date('Y-m-d', strtotime(trim(str_replace('/','-',$emapData[2]))));
+                        //dd();date('Y-m-d H:i:s',date_create_from_format('d/m/y H:i',trim($emapData[39]))->getTimestamp());
+                        $fechaServicio = date('Y-m-d',date_create_from_format('d/m/y',trim($emapData[2]))->getTimestamp());
                         $horaProgramada = date('H:i:s',strtotime(trim($emapData[3])));
 
                         $montContado = $emapData[14];
