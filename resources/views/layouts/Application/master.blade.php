@@ -19,6 +19,13 @@
     <link href="{{URL::to('nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{URL::to('iCheck/skins/flat/green.css')}}" rel="stylesheet">
+
+     <!-- Datatables -->
+     <link href="{{URL::to('datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+     <link href="{{URL::to('datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
+     <link href="{{URL::to('datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
+     <link href="{{URL::to('datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
+     <link href="{{URL::to('datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
 	
     <!-- bootstrap-progressbar -->
     <link href="{{URL::to('bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet">
@@ -220,14 +227,14 @@
         <!-- /page content -->
 
 
-        <!-- footer content -->
+        {{-- <!-- footer content -->
         <footer>
           <div class="pull-right">
             Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
           </div>
           <div class="clearfix"></div>
         </footer>
-        <!-- /footer content -->
+        <!-- /footer content --> --}}
       </div>
     </div>
 
@@ -270,6 +277,23 @@
     <script src="{{URL::to('bootstrap-daterangepicker/daterangepicker.js')}}"></script>
     <!-- validator -->
     <script src="{{URL::to('validator/validator.js')}}"></script>
+
+    <!-- Datatables -->
+    <script src="{{URL::to('datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{URL::to('datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{URL::to('datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{URL::to('datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{URL::to('datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+    <script src="{{URL::to('datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{URL::to('datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{URL::to('datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
+    <script src="{{URL::to('datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+    <script src="{{URL::to('datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{URL::to('datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
+    <script src="{{URL::to('datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
+    <script src="{{URL::to('jszip/dist/jszip.min.js')}}"></script>
+    <script src="{{URL::to('pdfmake/build/pdfmake.min.js')}}"></script>
+    <script src="{{URL::to('pdfmake/build/vfs_fonts.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="{{URL::to('build/js/custom.min.js')}}"></script>
