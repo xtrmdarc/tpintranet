@@ -13,6 +13,43 @@ class CargaServiciosController extends Controller
     public function index(){
         return view('contents.Application.Sistema.carga_servicios');
     }
+
+    public function cargaZonasPrincipal(Request $request){
+
+        $response = new \stdClass();
+        try{
+            
+            $zonas_file = fopen($request->file,'r');
+            //dd($servicios_xls);
+            $cont_fila = 0;
+            $id_carga = 0;
+            $cont = 0;
+            
+
+
+            while (($emapData = fgetcsv($zonas_file, 10000, ",")) !== FALSE){
+
+
+                $id_zona = trim($emapData[1]);
+                $desc_zona = trim($emapData[2]);
+                $punto_referencia = trim($emapData[3]);
+                $zona = DB::table('Zona')->where('IdZona',$id_zona);
+                if($zona->exists()){
+                    $zona->update(['DescZona'=>$desc_zona,'PuntoReferencia'=>$punto_referencia]);
+                }
+                else {
+                    DB::table('Zona')->insert(['DescZona'=>$desc_zona,'PuntoReferencia'=>$punto_referencia,'IdZona'=>$id_zona]);
+                }
+
+
+                
+            }
+            return json_encode(1);
+        }
+        catch(Exception $e){
+            dd($e->message);
+        }
+    }
     
     public function cargarServiciosPrincipal(Request $request){
         $response = new \stdClass();

@@ -14,10 +14,17 @@ class AjusteUsuariosController extends Controller
         return view ('contents.application.sistema.editorusuarios');
     }
 
+    public function listar_usuario()
+    {
+        $usuarios=DB::table('UsuarioSis')->paginate(10);
+        $data=[ 'usuarios'=>$usuarios];
+        return view('contents.application.sistema.listausuarios')->with($data);
+    }
+
     public function RegistroUsuarioRequest(Request $request)
     {
         $data = $request->all();
-dd($data);
+//dd($data);
         $NombreUsuario=$data['name'];
         $ApellidoUsuario=$data['lastname'];
         $CorreoUsuario=$data['email'];

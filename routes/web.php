@@ -24,7 +24,7 @@ Route::get('/InicioSesion','Application\Sistema\InicioSesionController@index');
 Route::get('/EditorUsuario','Application\Sistema\AjusteUsuariosController@index');
 Route::post('/RegistroUsuarioRequest','Application\Sistema\AjusteUsuariosController@RegistroUsuarioRequest');
 
-Route::get('/ListaUsuarios','Application\Sistema\UsuariosListados@index');
+Route::get('/ListaUsuarios','Application\Sistema\AjusteUsuariosController@listar_usuario');
 
 
 
