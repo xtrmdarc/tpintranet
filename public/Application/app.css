@@ -30,3 +30,40 @@
     font-size: 14px !important;
     font-weight: normal !important; 
 }
+
+.cf-cred-cliente-header{
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.35);
+    padding-right: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 16px;
+    margin-bottom: 20px;
+}
+
+.cf-cred-cliente-header .title{
+    display: inline-block;      
+    margin-right: 30px;
+        
+}
+.text-secondary-gray{
+    color: #7d7a78;
+}
+
+.cf-cred-cliente-body table tfoot tr td{
+    border: none;
+    padding: 4px 4px 4px 4px;
+}
+
+.table-mdl-comprobante tfoot tr td{
+    border: none;
+    padding: 4px 4px 4px 4px;
+}
+
+
+
+.table-mdl-comprobante tbody{
+   
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+}

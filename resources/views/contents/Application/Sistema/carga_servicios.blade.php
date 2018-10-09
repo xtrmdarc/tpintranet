@@ -82,28 +82,28 @@
   </div>
   
   <div id="mdl-carga-servicios" class="modal fade" tabindex="-1" role="dialog"  data-backdrop="static" data-keyboard="false">
-      <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="mdl-carga-servicios-title">Esto podría tomar tiempo..</h4>
-            
-          </div>
-          <div class="modal-body">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="mdl-carga-servicios-title">Esto podría tomar tiempo..</h4>
+          
+        </div>
+        <div class="modal-body">
 
-            <div class="row">
-              <div class="col-sm-12">
-                <div id="servicios_carga_loader" class="loader text-center" style="display:block;margin-left:auto;margin-right:auto;"></div>
-                
-                <div id="respuesta_servicios" style="display:none;"> 
-                
-                </div> 
-              </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div id="servicios_carga_loader" class="loader text-center" style="display:block;margin-left:auto;margin-right:auto;"></div>
+              
+              <div id="respuesta_servicios" style="display:none;"> 
+              
+              </div> 
             </div>
-
           </div>
+
         </div>
       </div>
     </div>
+  </div>
 
   
   <!-- /page content -->

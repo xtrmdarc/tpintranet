@@ -33,6 +33,8 @@
 
     <!-- bootstrap-datetimepicker -->
     <link href="{{URL::to('bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet">
+    <!-- Latest compiled and minified CSS  bootstrap-select --> 
+    <link rel="stylesheet" href="{{URL::to('bootstrap-select-1.13.2/css/bootstrap-select.min.css')}}">
 
     <link href="{{URL::to('Application/app.css')}}" rel="stylesheet">
   </head>
@@ -271,7 +273,10 @@
     <script src="{{URL::to('bootstrap-daterangepicker/daterangepicker.js')}}"></script>
     <!-- validator -->
     <script src="{{URL::to('validator/validator.js')}}"></script>
-
+    
+    <!-- Latest compiled and minified JavaScript bootstrap-select -->
+    <script src="{{URL::to('bootstrap-select-1.13.2/js/bootstrap-select.min.js')}}"></script>
+    
     <!-- Datatables -->
 
 

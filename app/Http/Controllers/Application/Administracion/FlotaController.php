@@ -19,6 +19,18 @@ class FlotaController extends Controller
         return view('contents.Application.Administracion.flota')->with($data);
     }
 
+    public function DetallePiloto(Request $request){
+
+        $data = $request->all();
+
+        $detalle = DB::table('Conductor')
+                    ->join('Vehiculo','Vehiculo.IdVehiculoSistema','Conductor.IdVehiculo')
+                    ->join('v_adm_flota','v_adm_flota.IdConductorSistema','Conductor.IdConductorSistema')
+                    ->where('Conductor.IdConductorSistema',$data['id_piloto'])->first();
+        //dd($detalle);
+        return json_encode($detalle);
+
+    }
     
 
 }
