@@ -21,7 +21,7 @@
           <div class="x_panel">
             <div class="x_title">
               <h2></h2>
-              <form id="frm-exportar-excel" method="POST" action="/Administracion/ExportarTarifarioExcel" target="_blank">
+              <form id="frm-exportar-excel" method="GET" action="/Administracion/ExportarTarifarioExcel" target="_blank">
                 <button id="btn_excel_export" class=" btn excel-export navbar-right">Excel</button>
               </form>
               @php
