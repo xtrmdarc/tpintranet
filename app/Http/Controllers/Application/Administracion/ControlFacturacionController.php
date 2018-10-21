@@ -17,7 +17,7 @@ class ControlFacturacionController extends Controller
                                     ->join('Servicio','Servicio.IdCliente','Cliente.IdClienteSistema')
                                     ->join('Usuario','Usuario.IdUsuarioSistema','Servicio.IdUsuarioTransportado')
                                     ->Where('Servicio.EsCredito',1)
-                                    ->Where('Servicio.ServicioFacturado',0)
+                                    ->Where('Servicio.ServicioProcesado',0)
                                     ->get()
                                     ->groupBy('IdClienteSistema','NombreCliente')->toArray();
 
@@ -91,7 +91,7 @@ class ControlFacturacionController extends Controller
             $servicios_id[] = $servicio['IdServicioSistema'];
         }
 
-        DB::table('Servicio')->whereIn('IdServicioSistema',$servicios_id)->update(['ServicioFacturado'=>1,'IdComprobante'=>$comprobante_id,'NumComprobante'=>$indentificador_cp]);
+        DB::table('Servicio')->whereIn('IdServicioSistema',$servicios_id)->update(['ServicioProcesado'=>1,'IdComprobante'=>$comprobante_id,'NumComprobante'=>$indentificador_cp]);
     }
     
 }

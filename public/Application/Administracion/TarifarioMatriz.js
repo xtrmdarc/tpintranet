@@ -2,6 +2,7 @@ $(function(){
 
     
 });
+
 $('#submit-buscar-tarifa').on('click',function(event){
 
     var form = $('#form-buscar-tarifa');

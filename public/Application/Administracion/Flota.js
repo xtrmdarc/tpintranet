@@ -47,4 +47,5 @@ function asigna_datos_modal_detalle_piloto(detalle_piloto){
     $('#mdl-txt-tipo-soat').text(detalle_piloto.DescSoat);
     $('#mdl-txt-fecha-soat').text(detalle_piloto.FechaVencSoat);
     $('#mdl-txt-fecha-tecnica').text(detalle_piloto.FechaVencRTecnica);
+    
 }

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 class TarifarioMatrixController extends Controller
 {
     //
+    public $tarifario;
+
     public function index(){
         return view('contents.Application.Administracion.tarifario_matriz');
     }
@@ -18,7 +20,7 @@ class TarifarioMatrixController extends Controller
         $data = $request->all();
         $direccion = $data['direccion_origen'];
         $zonas = DB::table('Zona')->get();
-        $tarifario = [];
+       
         foreach($zonas as $zona){
             $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
             $context = stream_context_create($opts);
@@ -46,5 +48,13 @@ class TarifarioMatrixController extends Controller
         }
 
         return $tarifario;
+    }
+
+    public function ExportarTarifarioExcel()
+    {
+        //dd($tarifario);
+        //$tarifario = [];
+        Excel::download(new ExportFromArray($tarifario),'tarifario-21/10/2018.xlsx');
+
     }
 }

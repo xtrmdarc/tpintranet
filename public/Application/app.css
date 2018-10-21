@@ -67,3 +67,8 @@
     overflow-y: auto;
     width: 100%;
 }
+
+.excel-export{
+    background-color: green;
+    color: white;
+}

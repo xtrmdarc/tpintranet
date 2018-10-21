@@ -286,7 +286,7 @@ class CargaServiciosController extends Controller
                             //'IdZonaOrigen' =>,
                             //IdZonaDestino,
                             'IdTipoAuto' => $id_tipo_auto,
-                            'ServicioFacturado'=>false,
+                            'ServicioProcesado'=>false,
                             //NumFactura => ,
                             //IdFactura,
                             'IdCarga' => $id_carga,

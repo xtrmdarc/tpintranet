@@ -12,6 +12,8 @@
     <title>Gentelella Alela! | </title>
 
     <!-- Bootstrap -->
+    <link href="{{URL::to('jquery-ui/css/jquery-ui.css')}}" rel="stylesheet">
+    <!-- Bootstrap -->
     <link href="{{URL::to('bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{URL::to('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -29,6 +31,7 @@
     <link href="{{URL::to('bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
+    
     <link href="{{URL::to('build/css/custom.min.css')}}" rel="stylesheet">
 
     <!-- bootstrap-datetimepicker -->
@@ -236,6 +239,8 @@
 
     <!-- jQuery -->
     <script src="{{URL::to('jquery/dist/jquery.min.js')}}"></script>
+    <!-- jQuery-ui -->
+    <script src="{{URL::to('jquery-ui/js/jquery-ui.min.js')}}"></script>    
     <!-- Bootstrap -->
     <script src="{{URL::to('bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <!-- FastClick -->

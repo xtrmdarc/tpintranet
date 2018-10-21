@@ -21,6 +21,9 @@
           <div class="x_panel">
             <div class="x_title">
               <h2></h2>
+              <form id="frm-exportar-excel" method="POST" action="/Administracion/ExportarTarifarioExcel" target="_blank">
+                <button id="btn_excel_export" class=" btn excel-export navbar-right">Excel</button>
+              </form>
               @php
               /*
               <ul class="nav navbar-right panel_toolbox">
@@ -82,5 +85,5 @@
   @endsection
 
   @section('scripts')
-    <script src="{{URL::to('Application/Sistema/TarifarioMatriz.js')}}"></script>
+    <script src="{{URL::to('Application/Administracion/TarifarioMatriz.js')}}"></script>
   @endsection
