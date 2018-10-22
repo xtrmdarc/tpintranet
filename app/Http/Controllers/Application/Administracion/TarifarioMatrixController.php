@@ -24,6 +24,7 @@ class TarifarioMatrixController extends Controller
         $zonas = DB::table('Zona')->get();
         $tarifario =[];
         $cont = 0;
+   
         foreach($zonas as $zona){
 
                 $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
@@ -51,14 +52,18 @@ class TarifarioMatrixController extends Controller
                 $tarifario[] = $tarifa;
             
         }
+        //$tarifario->toArray();
         session(['tarifario'=>$tarifario]);
         return $tarifario;
     }
 
     public function ExportarTarifarioExcel()
     {
-        //dd($tarifario);
+        //dd(session('tarifario'));
         //$tarifario = [];
+        ob_end_clean();
+        ob_start();
+        
         return Excel::download(new ExportFromArray(session('tarifario')),'tarifario-21-10-2018.xlsx');
 
     }

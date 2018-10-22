@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-class ExportFromArray extends Controller
+class ExportFromArray implements FromCollection, WithHeadings
 {
     //
     public function __construct($array)
     {
         $this->collection = collect($array);
+        //dd($this->collection);
     }
 
     public function collection()    
