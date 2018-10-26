@@ -45,7 +45,7 @@ class TarifarioMatrixController extends Controller
                     $tarifa->kilometro_text = $data->rows[0]->elements[0]->distance->text;
                     $tarifa->kilometro = $data->rows[0]->elements[0]->distance->value;
                     $tarifa->duracion = $data->rows[0]->elements[0]->duration->text;
-                    $tarifa->costo = round($data->rows[0]->elements[0]->distance->value/1000*1.3 + 3,2);
+                    $tarifa->costo = round($data->rows[0]->elements[0]->distance->value/1000< 20? $data->rows[0]->elements[0]->distance->value/1000*1.5 + 10:$data->rows[0]->elements[0]->distance->value/1000*2 ,2);
                 }
                 
                 

@@ -198,19 +198,26 @@ class CargaServiciosController extends Controller
                             $id_conductor = $conductor_obj->IdConductorSistema;
                         }
                         else{
-                            
-                            if(substr($id_vehiculo_xls,1,1) == 'M' ){
+                            $primera_letra_conductor = substr(trim($id_vehiculo_xls),0,1);
+                            if($primera_letra_conductor == 'M' ){
                                 $id_tipo_asociacion = 1; //Permanente
+                                $id_tipo_conductor = 2;
                             }
                             else{
                                 $id_tipo_asociacion = 2; //Apoyo
+                                $id_tipo_conductor = 3;
+                                if($primera_letra_conductor == 'V')
+                                    $id_tipo_conductor = 5;
+                                
                             }
 
                             $id_conductor = DB::table('Conductor')->insertGetId(['IdConductor'=> $id_conductor_xls,
                                                                                 'NombreConductor'=> $nombre_conductor_xls,
                                                                                 'IdVehiculo' => $id_vehiculo,
                                                                                 'CodPlanillaConductor' => $cod_planilla_conductor_xls,
-                                                                                'IdTipoAsociacion'=>$id_tipo_asociacion]);
+                                                                                'IdTipoAsociacion'=>$id_tipo_asociacion,
+                                                                                'IdTipoConductor'=> $id_tipo_conductor
+                                                                                ]);
 
                         }
 
