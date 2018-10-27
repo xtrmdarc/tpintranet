@@ -332,7 +332,43 @@ class CargaServiciosController extends Controller
     }
 
     public function CargarDescuentos(Request $request){
-        
+        $response = new \stdClass();
+        try{
+            
+            $dctos_file = fopen($request->file,'r');
+            //dd($servicios_xls);
+            $cont_fila = 0;
+            $id_carga = 0;
+            $cont = 0;
+            
+
+
+            while (($emapData = fgetcsv($dctos_file, 10000, ",")) !== FALSE){
+                $cont_fila++;
+                if($cont_fila > 1)
+                {
+                    $id_vehiculo = trim($emapData[1]);
+                    $descuento = trim($emapData[11]);
+                    
+                    $vehiculo = DB::table('Vehiculo')->where('IdVehiculo',$id_vehiculo);
+                    if($vehiculo->exists()){
+                        $conductor = DB::table('Conductor')->where('IdVehiculo',$vehiculo->first()->IdVehiculoSistema)->first();
+                        DB::table('Descuento')->insert([
+                                                        'IdConductor'=> $conductor->IdConductorSistema,
+                                                        'FechaInicio'=> '2018-10-13',
+                                                        'FechaFin'=> '2018-10-19',
+                                                        'MontoDscto'=> $descuento
+                                                        ]);
+                        
+                    }
+                }
+                
+            }
+            return json_encode(1);
+        }
+        catch(Exception $e){
+            dd($e->message);
+        }
     }
 
 }
