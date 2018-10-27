@@ -331,4 +331,8 @@ class CargaServiciosController extends Controller
         echo 'hola termino';
     }
 
+    public function CargarDescuentos(Request $request){
+        
+    }
+
 }
