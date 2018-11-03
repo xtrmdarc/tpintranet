@@ -19,9 +19,11 @@
         Route::get('Facturados','Application\Administracion\FacturadosController@index');
         Route::post('BuscarFacturados','Application\Administracion\FacturadosController@buscar_facturados');
         
-
+        //MacroPago
+        Route::get('MacroPago','Application\Administracion\MacroPagoController@index');
         
     });
     
     Route::post('BuscarClientesAC','Application\Administracion\FacturadosController@ac_buscar_clientes');
+    Route::post('BuscarMovilAC','Application\Sistema\ServiciosController@ac_buscar_moviles');
 ?>

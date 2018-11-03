@@ -10,7 +10,9 @@
 	  <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
     <title>Gentelella Alela! | </title>
-
+    <!-- Datatable-->
+    <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    
     <!-- Bootstrap -->
     <link href="{{URL::to('jquery-ui/css/jquery-ui.css')}}" rel="stylesheet">
     <!-- Bootstrap -->
@@ -283,6 +285,8 @@
     <script src="{{URL::to('bootstrap-select-1.13.2/js/bootstrap-select.min.js')}}"></script>
     
     <!-- Datatables -->
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    
 
 
     <!-- Custom Theme Scripts -->

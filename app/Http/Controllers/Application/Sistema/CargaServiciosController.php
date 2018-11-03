@@ -54,7 +54,7 @@ class CargaServiciosController extends Controller
     public function cargarServiciosPrincipal(Request $request){
         $response = new \stdClass();
         try{
-            
+            //dd($request->file);
             $servicios_file = fopen($request->file,'r');
             //dd($servicios_xls);
             $cont_fila = 0;
@@ -331,44 +331,57 @@ class CargaServiciosController extends Controller
         echo 'hola termino';
     }
 
+    public function InicioCargaDescuento()
+    {
+        return view('contents.Application.Sistema.carga_descuentos');
+    }
+
     public function CargarDescuentos(Request $request){
+        
+        $params = $request->all();
         $response = new \stdClass();
-        try{
-            
-            $dctos_file = fopen($request->file,'r');
-            //dd($servicios_xls);
-            $cont_fila = 0;
-            $id_carga = 0;
-            $cont = 0;
-            
+        
+        //dd($params,$request->file);
+        //dd($request,$request->input('descuento_file'));
+        $dctos_file = fopen($request->file,'r');
+        //dd($servicios_xls);
+        $cont_fila = 0;
+        $id_carga = 0;
+        $cont = 0;
+        
+        $fecha_inicio_pre = substr($params['daterangepicker'],'0',strpos($params['daterangepicker'],'-')-1);
+        //dd(date_create_from_format('d/m/Y',$fecha_inicio_pre));
+        $fecha_inicio = date('Y-m-d',date_create_from_format('d/m/Y',trim($fecha_inicio_pre))->getTimestamp());
 
+        $fecha_fin_pre =substr($params['daterangepicker'],strpos($params['daterangepicker'],'-')+2);
+        $fecha_fin = date('Y-m-d',date_create_from_format('d/m/Y',trim($fecha_fin_pre))->getTimestamp());
 
-            while (($emapData = fgetcsv($dctos_file, 10000, ",")) !== FALSE){
-                $cont_fila++;
-                if($cont_fila > 1)
-                {
-                    $id_vehiculo = trim($emapData[1]);
-                    $descuento = trim($emapData[11]);
-                    
-                    $vehiculo = DB::table('Vehiculo')->where('IdVehiculo',$id_vehiculo);
-                    if($vehiculo->exists()){
-                        $conductor = DB::table('Conductor')->where('IdVehiculo',$vehiculo->first()->IdVehiculoSistema)->first();
-                        DB::table('Descuento')->insert([
-                                                        'IdConductor'=> $conductor->IdConductorSistema,
-                                                        'FechaInicio'=> '2018-10-13',
-                                                        'FechaFin'=> '2018-10-19',
-                                                        'MontoDscto'=> $descuento
-                                                        ]);
-                        
-                    }
-                }
+        while (($emapData = fgetcsv($dctos_file, 10000, ",")) !== FALSE){
+            $cont_fila++;
+            if($cont_fila > 1)
+            {
                 
+                $id_vehiculo = trim($emapData[0]);
+                $descuento = trim($emapData[10]);
+                //dd($id_vehiculo,$descuento);
+                $vehiculo = DB::table('Vehiculo')->where('IdVehiculo',$id_vehiculo);
+                if($vehiculo->exists()){
+                    $conductor = DB::table('Conductor')->where('IdVehiculo',$vehiculo->first()->IdVehiculoSistema)->first();
+                    DB::table('Descuento')->insert([
+                                                    'IdConductor'=> $conductor->IdConductorSistema,
+                                                    'FechaInicio'=> $fecha_inicio,
+                                                    'FechaFin'=> $fecha_fin,
+                                                    'MontDscto'=> $descuento
+                                                    ]);
+                    $cont++;
+                }
             }
-            return json_encode(1);
+            
         }
-        catch(Exception $e){
-            dd($e->message);
-        }
+        $response->status = 1;
+        $response->numFilas = $cont;
+        return json_encode($response);
+      
     }
 
 }
