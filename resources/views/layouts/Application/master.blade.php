@@ -83,9 +83,9 @@
                   </li>
                   <li><a><i class="fa fa-edit"></i> Administracion <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Pago Macro</a></li>
-                      <li><a href="form_advanced.html">Flota</a></li>
-                      <li><a href="form_validation.html">Control Facturacion</a></li>
+                      <li><a href="/Administracion/MacroPago">Pago Macro</a></li>
+                      <li><a href="/Administracion/Flota">Flota</a></li>
+                      <li><a href="/Administracion/CFacturacionl">Control Facturacion</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i> Gerencia<span class="fa fa-chevron-down"></span></a>
@@ -96,8 +96,9 @@
                   </li>
                   <li><a><i class="fa fa-table"></i> Sistema <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tables.html">Usuarios</a></li>
-                      <li><a href="tables_dynamic.html">Objetivos</a></li>
+                      <li><a href="/Sistema/CargaServicios">Carga Servicios</a></li>
+                      <li><a href="/Sistema/CargaDescuentos">Carga Descuentos</a></li>
+                      <li><a href="/Sistema/Servicios">Servicios</a></li>
                     </ul>
                   </li>
                   
