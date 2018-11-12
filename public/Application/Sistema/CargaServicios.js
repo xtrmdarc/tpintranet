@@ -17,7 +17,7 @@ $(function(){
                 if(respuesta.numFilas>0)
                 {
                     html_respuesta = `
-                    <form id="frm_guardar_carga" method="POST" action="/Sistema/CargaFinProceso">
+                    <form id="frm_guardar_carga" method="GET" action="/Sistema/Servicios">
                         <input id="id_carga" name="id_carga" type="hidden" value="${respuesta.carga_id}" >
                         <input type="hidden" name="_token" value="`+$('meta[name="csrf-token"]').attr('content')+`">
                         <div class="form-group " >

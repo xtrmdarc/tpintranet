@@ -124,7 +124,7 @@
 
 @section('scripts')
   <script src="{{URL::to('dropzone/dist/min/dropzone.min.js')}}"></script>
-  <script src="{{URL::to('Application/Sistema/CargaServicios.js')}}"></script>
+  <script src="{{URL::to('Application/Sistema/CargaDescuentos.js')}}"></script>
   <script type="text/javascript">
     $(function(){
         $('input[name="daterangepicker"]').daterangepicker({

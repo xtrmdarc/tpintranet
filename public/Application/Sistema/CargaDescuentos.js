@@ -16,7 +16,7 @@ $(function(){
                 if(respuesta.numFilas>0)
                 {
                     html_respuesta = `
-                    <form id="frm_guardar_carga" method="POST" action="/Sistema/CargaFinProceso">
+                    
                         <input id="id_carga" name="id_carga" type="hidden" value="${respuesta.carga_id}" >
                         <input type="hidden" name="_token" value="`+$('meta[name="csrf-token"]').attr('content')+`">
                         <div class="form-group " >
@@ -26,7 +26,7 @@ $(function(){
                             
                         </div>
                         <button type="submit" class="btn btn-primary" style="width:100%;margin-top:15px;" data-dismiss="modal" >Aceptar</button>
-                    </form>`
+                    `
 
                     $("#mdl-carga-servicios-title").text('Carga completada con éxito');
 
