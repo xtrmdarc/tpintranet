@@ -21,6 +21,7 @@
         
         //MacroPago
         Route::get('MacroPago','Application\Administracion\MacroPagoController@index');
+        Route::post('ObtenerMacrosPago','Application\Administracion\MacroPagoController@ObtenerMacrosPago');
         
     });
     
