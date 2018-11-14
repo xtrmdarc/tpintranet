@@ -12,16 +12,29 @@
         <h3 class="title text-primary">Flota</h3>
       </div>
 
-      <div class="title_right">
-        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Go!</button>
-            </span>
+      <div class="clearfix"></div>
+      <form id="frm-buscar-flota" action="/Administracion/BuscarFlota" method="POST">
+        @csrf
+         
+          <div class="form-group col-sm-3">
+            <label for="vehiculo_id">Escoge la Móvil</label>
+            <input type="hidden" name="ac_movil_id"  id="ac_movil_id" value="{{Request()->ac_movil_id?Request()->ac_movil_id :''}}">
+            <input type="text" name="ac_movil" id="ac_movil" class="form-control" placeholder="M020" value="{{Request()->ac_movil?Request()->ac_movil:''}}">
           </div>
-        </div>
-      </div>
+          <div class="form-group col-sm-3">
+            <label for="vehiculo_id">Escoge el tipo de Asociación</label>
+            <select name="slc_tipo_asoc" class="form-control" id="slc_tipo_asoc">
+                  <option value="" selected>Cualquiera</option>
+              @foreach ($tipo_asoc as $ta)
+                  <option value="{{$ta->IdTipoAsociacion}}">{{$ta->DescTipoAsociacion}} </option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group col-sm-3">
+            <label> &nbsp; </label>
+            <input type="submit" id="btn_buscar_servicios" class="btn btn-primary form-control" value="Buscar">
+          </div>
+      </form>
     </div>
 
     <div class="clearfix"></div>
@@ -43,7 +56,7 @@
           </div>
           <div class="x_content">
 
-            <table class="table">
+            <table id="table_flota" class="table">
               <thead>
                 <tr>
                   <th>Conductor</th>
@@ -65,15 +78,16 @@
                               <span class="label label-{{$conductor->Estado=='Activo'?'success':'danger'}} sticker-tabla">{{$conductor->Estado}}</span>
                           </td>
                           <td class="text-center" >{{$conductor->Inactividad}}</td>
-                          <td class="text-center"  ><button class="btn btn-primary" onclick="detalle_piloto({{'\''. $conductor->IdConductorSistema.'\''}})" >Detalles</button></td>
+                          <td class="text-center"  >
+                            <button class="btn btn-primary" onclick="detalle_piloto({{'\''. $conductor->IdConductorSistema.'\''}})" >Detalles</button>
+                            <a class="btn btn-success" href="/Administracion/Flota/{{$conductor->IdConductorSistema}}" >Editar</a>
+                          </td>
                           
                       </tr>
                   @endforeach
               </tbody>
             </table>
-            <div class="row" style="float:right">
-              {{ $flota->links() }}
-            </div>
+
             
           </div>
         </div>
@@ -141,6 +155,9 @@
         </div>
 
       </div>
+      <div class="modal-footer">
+          <button class="btn"  data-dismiss="modal" >Cerrar</button>
+      </div>
     </div>
   </div>
 </div>
@@ -150,4 +167,13 @@
 
 @section('scripts')
   <script src="{{URL::to('Application/Administracion/Flota.js')}}"></script> 
+  <script>
+    flota_table = $('#table_flota').DataTable({
+              'searching':false,
+              'language':{
+                  url:'//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'
+              } 
+            });
+    
+  </script>
 @endsection

@@ -6,6 +6,12 @@
         //Flota
         Route::get('Flota','Application\Administracion\FlotaController@index');
         Route::post('DetallePiloto','Application\Administracion\FlotaController@DetallePiloto');
+        Route::post('BuscarFlota','Application\Administracion\FlotaController@BuscarFlota');
+        Route::prefix('Flota')->group(function(){
+            Route::get('/{id}','Application\Administracion\FlotaController@index_editar');
+            Route::post('/EditarConductor','Application\Administracion\FlotaController@EditarConductor');
+        });
+
         //Control Facturacion
         Route::get('CFacturacion','Application\Administracion\ControlFacturacionController@index');
         Route::post('ProcesarComprobante','Application\Administracion\ControlFacturacionController@procesarComprobante');
