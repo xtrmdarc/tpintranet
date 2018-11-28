@@ -63,6 +63,7 @@
                       <th>distancia (m)</th>
                       <th>duracion</th>
                       <th>costo sugerido (S/.)</th>
+                      <th>costo sugerido redondeo(S/.)</th>
                     </tr>
                   </thead>
                   <tbody>
