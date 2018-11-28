@@ -29,6 +29,13 @@
         Route::get('MacroPago','Application\Administracion\MacroPagoController@index');
         Route::post('ObtenerMacrosPago','Application\Administracion\MacroPagoController@ObtenerMacrosPago');
         
+        //Clientes
+        Route::get('Clientes','Application\Administracion\ClientesController@index');
+        Route::prefix('Clientes')->group(function(){
+            Route::get('/NuevoCliente','Application\Administracion\ClientesController@index_crear');
+            Route::get('Editar/{id}','Application\Administracion\ClientesController@index_editar');
+            Route::post('/GuardarCliente','Application\Administracion\ClientesController@GuardarCliente');
+        });
     });
     
     Route::post('BuscarClientesAC','Application\Administracion\FacturadosController@ac_buscar_clientes');

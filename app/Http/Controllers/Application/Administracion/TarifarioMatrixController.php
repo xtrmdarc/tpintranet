@@ -26,12 +26,12 @@ class TarifarioMatrixController extends Controller
         $cont = 0;
    
         foreach($zonas as $zona){
-
+            
                 $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
                 $context = stream_context_create($opts);
-                $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".urlencode(trim($direccion))."&destinations=".urlencode(trim($zona->PuntoReferencia))."&key=AIzaSyDYqLIC2Li4fVBTAW-WTovhWpyaZ3BuyVQ";
+                $url = "https://maps.googleapis.com/maps/api/directions/json?origin=".urlencode(trim($direccion))."&destination=".urlencode(trim($zona->PuntoReferencia))."&alternatives=true&key=AIzaSyDYqLIC2Li4fVBTAW-WTovhWpyaZ3BuyVQ";
                 $data = json_decode(@file_get_contents($url,false,$context));
-                
+                //dd($url,$data);
                 $tarifa = new \stdClass();
                 $tarifa->origen = trim($direccion);
                 $tarifa->zona_destino = $zona->IdZona;
@@ -42,14 +42,18 @@ class TarifarioMatrixController extends Controller
                     $tarifa->costo =0;
                 }
                 else{
+                   
                     $tarifa->kilometro_text = $data->rows[0]->elements[0]->distance->text;
-                    $tarifa->kilometro = $data->rows[0]->elements[0]->distance->value;
-                    $tarifa->duracion = $data->rows[0]->elements[0]->duration->text;
-                    $tarifa->costo = round($data->rows[0]->elements[0]->distance->value/1000< 20? $data->rows[0]->elements[0]->distance->value/1000*1.5 + 10:$data->rows[0]->elements[0]->distance->value/1000*2 ,2);
+                    $tarifa->kilometro = GetPromedioRutasDistancia($data->routes);
+                    $tarifa->duracion = GetPromedioRutasDuracion($data->routes);
+                    $tarifa->costo = round($tarifa->kilometro/1000< 20? $tarifa->kilometro/1000*1.5 + 10:$tarifa->kilometro/1000*2 ,2);
+                    dd($data);
+                   
                 }
                 
                 
                 $tarifario[] = $tarifa;
+                return $tarifario;
             
         }
         //$tarifario->toArray();
@@ -67,4 +71,29 @@ class TarifarioMatrixController extends Controller
         return Excel::download(new ExportFromArray(session('tarifario')),'tarifario-21-10-2018.xlsx');
 
     }
+
+    public function GetPromedioRutasDistancia($rutas)
+    {   
+        $suma = 0;
+        $cont = 0;
+        foreach ($rutas as $ruta) {
+            $suma += $ruta->legs[0]->distance->value;
+            $cont++;
+        }
+        $promedio = $suma/$cont;
+        return $promedio;
+    }
+
+    public function GetPromedioRutasTiempo($rutas)
+    {   
+        $suma = 0;
+        $cont = 0;
+        foreach ($rutas as $ruta) {
+            $suma += $ruta->legs[0]->duration->value;
+            $cont++;
+        }
+        $promedio = $suma/$cont;
+        return $promedio;
+    }
+
 }

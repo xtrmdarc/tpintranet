@@ -86,6 +86,7 @@
                       <li><a href="/Administracion/MacroPago">Pago Macro</a></li>
                       <li><a href="/Administracion/Flota">Flota</a></li>
                       <li><a href="/Administracion/CFacturacion">Control Facturacion</a></li>
+                      <li><a href="/Administracion/Clientes">Clientes</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i> Gerencia<span class="fa fa-chevron-down"></span></a>

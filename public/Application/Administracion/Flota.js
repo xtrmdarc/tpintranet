@@ -130,7 +130,12 @@ $('#frm-buscar-flota').on('submit',function(e){
                                             <span class="label label-${v.Estado=='Activo'?'success':'danger'} sticker-tabla">${v.Estado}</span>
                                         </td>
                                         <td class="text-center" >${v.Inactividad}</td>
-                                        <td class="text-center"  ><button class="btn btn-primary" onclick="detalle_piloto(${'\''+ v.IdConductorSistema+'\''})" >Detalles</button></td>
+                                       
+                                        <td class="text-center"  >
+                                            <button class="btn btn-primary" onclick="detalle_piloto(${'\''+ v.IdConductorSistema+'\''})" >Detalles</button>
+                                            <a class="btn btn-success" href="/Administracion/Flota/${v.IdConductorSistema}" >Editar</a>
+                                        </td>
+                                        
                                     </tr>`;
             });
             $('#table_flota tbody').append(lista_flota_html);
