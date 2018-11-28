@@ -31,8 +31,8 @@ $('#submit-buscar-tarifa').on('click',function(event){
                     <td>${tarifa.zona_destino}</td>
                     <td>${tarifa.destino}</td>
                     <td>${tarifa.kilometro_text}</td>
-                    <td>${tarifa.kilometro}</td>
-                    <td>${tarifa.duracion}</td>
+                    <td>${tarifa.kilometro.toFixed(0)}</td>
+                    <td>${tarifa.duracion.toFixed(0)}</td>
                     <td>${tarifa.costo.toFixed(2)}</td>
                     <td>${tarifa.costo.toFixed(0)}</td>
                 </tr>`;
