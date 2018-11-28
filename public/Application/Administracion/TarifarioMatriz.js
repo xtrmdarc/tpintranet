@@ -34,7 +34,7 @@ $('#submit-buscar-tarifa').on('click',function(event){
                     <td>${tarifa.kilometro.toFixed(0)}</td>
                     <td>${tarifa.duracion.toFixed(0)}</td>
                     <td>${tarifa.costo.toFixed(2)}</td>
-                    <td>${tarifa.costo.toFixed(0)}</td>
+                    
                 </tr>`;
             });
             $('#buscar_tarifa_loader').css('display','none');
