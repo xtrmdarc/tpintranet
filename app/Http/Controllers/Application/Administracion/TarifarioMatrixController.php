@@ -37,7 +37,7 @@ class TarifarioMatrixController extends Controller
                 $tarifa->zona_destino = $zona->IdZona;
                 $tarifa->destino = $zona->PuntoReferencia;
                 
-                if(!isset($data->rows[0]->elements[0]->distance)) 
+                if(!isset($data->routes)) 
                 {
                     $tarifa->costo =0;
                 }
