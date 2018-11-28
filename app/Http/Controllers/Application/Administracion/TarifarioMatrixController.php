@@ -40,7 +40,7 @@ class TarifarioMatrixController extends Controller
                 if(!isset($data->routes[0]->legs)) 
                 {
                     $tarifa->costo =0;
-                    dd($data);
+                    //dd($data);
                 }
                 else{
                    
