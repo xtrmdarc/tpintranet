@@ -37,9 +37,10 @@ class TarifarioMatrixController extends Controller
                 $tarifa->zona_destino = $zona->IdZona;
                 $tarifa->destino = $zona->PuntoReferencia;
                 
-                if(!isset($data->routes)) 
+                if(!isset($data->routes[0]->legs)) 
                 {
                     $tarifa->costo =0;
+                    dd($data);
                 }
                 else{
                    
@@ -81,7 +82,7 @@ class TarifarioMatrixController extends Controller
             $suma += $ruta->legs[0]->distance->value;
             $cont++;
         }
-        if($cont== 0) dd($rutas);
+        if($cont== 0) 
         $promedio = $suma/$cont;
         return $promedio;
     }
