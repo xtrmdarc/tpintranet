@@ -44,8 +44,8 @@ class TarifarioMatrixController extends Controller
                 else{
                    
                     //$tarifa->kilometro_text = $data->rows[0]->elements[0]->distance->text;
-                    $tarifa->kilometro = GetPromedioRutasDistancia($data->routes);
-                    $tarifa->duracion = GetPromedioRutasDuracion($data->routes);
+                    $tarifa->kilometro = $this->GetPromedioRutasDistancia($data->routes);
+                    $tarifa->duracion = $this->GetPromedioRutasDuracion($data->routes);
                     $tarifa->costo = round($tarifa->kilometro/1000< 20? $tarifa->kilometro/1000*1.5 + 10:$tarifa->kilometro/1000*2 ,2);
                     dd($data);
                    
