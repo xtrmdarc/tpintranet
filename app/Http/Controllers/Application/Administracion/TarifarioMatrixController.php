@@ -82,7 +82,7 @@ class TarifarioMatrixController extends Controller
             $suma += $ruta->legs[0]->distance->value;
             $cont++;
         }
-        if($cont== 0) 
+        
         $promedio = $suma/$cont;
         return $promedio;
     }
