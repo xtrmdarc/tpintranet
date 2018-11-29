@@ -37,6 +37,7 @@ class TarifarioMatrixController extends Controller
                 $tarifa->zona_destino = $zona->IdZona;
                 $tarifa->destino = $zona->PuntoReferencia;
                 
+                //if(!isset($data->rows->elements)) 
                 if(!isset($data->routes[0]->legs)) 
                 {
                     $tarifa->costo =0;
@@ -44,10 +45,10 @@ class TarifarioMatrixController extends Controller
                 }
                 else{
                    
-                    
-                    $tarifa->kilometro = round($this->GetPromedioRutasDistancia($data->routes),2);
+                    $ruta = $this->GetRutaMasCorta($data->routes);
+                    $tarifa->kilometro = round($ruta->distancia,2);
                     $tarifa->kilometro_text = round($tarifa->kilometro/1000,2)." km";
-                    $tarifa->duracion = round($this->GetPromedioRutasTiempo($data->routes),0);
+                    $tarifa->duracion = round($ruta->duracion,0);
                     //$tarifa->costo = round($tarifa->kilometro/1000< 20? $tarifa->kilometro/1000*1.5 + 10:$tarifa->kilometro/1000*2 ,2);
                     $tarifa->costo = round($tarifa->kilometro/1000< 20? $tarifa->kilometro/1000*1.5 + 10:$tarifa->kilometro/1000*2 ,0);
                     //dd($data);
@@ -73,6 +74,26 @@ class TarifarioMatrixController extends Controller
         
         return Excel::download(new ExportFromArray(session('tarifario')),'tarifario-21-10-2018.xlsx');
 
+    }
+
+    public function GetRutaMasCorta($rutas)
+    {   
+        $ruta_menor = new \stdClass();
+        $distancia_menor = 0;
+        $cont = 0;
+
+        foreach ($rutas as $ruta) {
+            $valor_actual =  $ruta->legs[0]->distance->value;
+
+            if($distancia_menor >= $valor_actual)
+            {
+                $ruta_menor->distancia = $valor_actual;
+                $ruta_menor->duracion = $ruta->legs[0]->duration->value;
+                $distancia_menor = $valor_actual;
+            }
+            
+        }
+        return $ruta_menor;
     }
 
     public function GetPromedioRutasDistancia($rutas)
