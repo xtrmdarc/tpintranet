@@ -81,7 +81,7 @@ class TarifarioMatrixController extends Controller
         $ruta_menor = new \stdClass();
         $distancia_menor = 0;
         $cont = 0;
-
+        $ruta_menor->distancia = $rutas[0]->legs[0]->distance->value;
         foreach ($rutas as $ruta) {
             $valor_actual =  $ruta->legs[0]->distance->value;
 
