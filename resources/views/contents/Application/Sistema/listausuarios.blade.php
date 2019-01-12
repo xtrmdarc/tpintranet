@@ -39,18 +39,21 @@
                           <th>Nombre Completo</th>
                           <th>IDRol</th>
                           <th>FechaDeIngreso</th>
+                          <th>Acciones</th>
                         </tr>
                       </thead>
 
 
                       <tbody>
                         @foreach ($usuarios as $usuario)
-                       <tr>
-                       <td>{{$usuario->DNIUsuario}}</td>
-                       <td>{{$usuario->NombreUsuario.$usuario->ApellidoUsuario}}</td>
-                       <td>{{$usuario->IDRol}}</td>
-                       <td>{{$usuario->FechaDeIngresoUsuario}}</td>
-                       </tr>
+                        
+                          <tr>
+                          <td>{{$usuario->DNIUsuario}}</td>
+                          <td>{{$usuario->NombreUsuario.$usuario->ApellidoUsuario}}</td>
+                          <td>{{$usuario->IDRol}}</td>
+                          <td>{{$usuario->FechaDeIngresoUsuario}}</td>
+                          <td><button class="btn btn-primary" onclick="window.location.replace('Usuarios/EditarUsuario/{{$usuario->IDUsuarioSis}}')" >Editar </button></td>
+                          </tr>
                        @endforeach
                       </tbody>
                     </table>
