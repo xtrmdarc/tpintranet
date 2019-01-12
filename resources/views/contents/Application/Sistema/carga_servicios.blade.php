@@ -25,7 +25,7 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Form Upload </h3>
+          <h3>Carga Servicios</h3>
         </div>
 
         <div class="title_right">
@@ -46,7 +46,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Dropzone multiple file uploader</h2>
+              <h2>Zona de carga</h2>
               <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -65,7 +65,7 @@
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
-              <p>Drag multiple files to the box below for multi upload or click to select files. This is for demonstration purposes only, the files are not uploaded to any server.</p>
+              <p>Cargue un archivo csv que contenga los datos de los servicios. </p>
               <form action="/Sistema/CargarServiciosRequest" class="dropzone" id="dzCargarServicios">
                   @csrf
                   <div class="dz-message">Arrastre el archivo de servicios hasta aquí para subirlo al servidor o haga click aquí.</div>
@@ -82,28 +82,28 @@
   </div>
   
   <div id="mdl-carga-servicios" class="modal fade" tabindex="-1" role="dialog"  data-backdrop="static" data-keyboard="false">
-      <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="mdl-carga-servicios-title">Esto podría tomar tiempo..</h4>
-            
-          </div>
-          <div class="modal-body">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="mdl-carga-servicios-title">Esto podría tomar tiempo..</h4>
+          
+        </div>
+        <div class="modal-body">
 
-            <div class="row">
-              <div class="col-sm-12">
-                <div id="servicios_carga_loader" class="loader text-center" style="display:block;margin-left:auto;margin-right:auto;"></div>
-                
-                <div id="respuesta_servicios" style="display:none;"> 
-                
-                </div> 
-              </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div id="servicios_carga_loader" class="loader text-center" style="display:block;margin-left:auto;margin-right:auto;"></div>
+              
+              <div id="respuesta_servicios" style="display:none;"> 
+              
+              </div> 
             </div>
-
           </div>
+
         </div>
       </div>
     </div>
+  </div>
 
   
   <!-- /page content -->

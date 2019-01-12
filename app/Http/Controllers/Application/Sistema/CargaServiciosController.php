@@ -54,7 +54,7 @@ class CargaServiciosController extends Controller
     public function cargarServiciosPrincipal(Request $request){
         $response = new \stdClass();
         try{
-            
+            //dd($request->file);
             $servicios_file = fopen($request->file,'r');
             //dd($servicios_xls);
             $cont_fila = 0;
@@ -198,19 +198,26 @@ class CargaServiciosController extends Controller
                             $id_conductor = $conductor_obj->IdConductorSistema;
                         }
                         else{
-                            
-                            if(substr($id_vehiculo_xls,1,1) == 'M' ){
+                            $primera_letra_conductor = substr(trim($id_vehiculo_xls),0,1);
+                            if($primera_letra_conductor == 'M' ){
                                 $id_tipo_asociacion = 1; //Permanente
+                                $id_tipo_conductor = 2;
                             }
                             else{
                                 $id_tipo_asociacion = 2; //Apoyo
+                                $id_tipo_conductor = 3;
+                                if($primera_letra_conductor == 'V')
+                                    $id_tipo_conductor = 5;
+                                
                             }
 
                             $id_conductor = DB::table('Conductor')->insertGetId(['IdConductor'=> $id_conductor_xls,
                                                                                 'NombreConductor'=> $nombre_conductor_xls,
                                                                                 'IdVehiculo' => $id_vehiculo,
                                                                                 'CodPlanillaConductor' => $cod_planilla_conductor_xls,
-                                                                                'IdTipoAsociacion'=>$id_tipo_asociacion]);
+                                                                                'IdTipoAsociacion'=>$id_tipo_asociacion,
+                                                                                'IdTipoConductor'=> $id_tipo_conductor
+                                                                                ]);
 
                         }
 
@@ -286,7 +293,7 @@ class CargaServiciosController extends Controller
                             //'IdZonaOrigen' =>,
                             //IdZonaDestino,
                             'IdTipoAuto' => $id_tipo_auto,
-                            'ServicioFacturado'=>false,
+                            'ServicioProcesado'=>false,
                             //NumFactura => ,
                             //IdFactura,
                             'IdCarga' => $id_carga,
@@ -322,6 +329,59 @@ class CargaServiciosController extends Controller
         $data = $request->all();
         DB::table('Carga')->where('IdCarga',$data['id_carga'])->update(['DescCarga'=>$data['nombre_carga']]);
         echo 'hola termino';
+    }
+
+    public function InicioCargaDescuento()
+    {
+        return view('contents.Application.Sistema.carga_descuentos');
+    }
+
+    public function CargarDescuentos(Request $request){
+        
+        $params = $request->all();
+        $response = new \stdClass();
+        
+        //dd($params,$request->file);
+        //dd($request,$request->input('descuento_file'));
+        $dctos_file = fopen($request->file,'r');
+        //dd($servicios_xls);
+        $cont_fila = 0;
+        $id_carga = 0;
+        $cont = 0;
+        
+        $fecha_inicio_pre = substr($params['daterangepicker'],'0',strpos($params['daterangepicker'],'-')-1);
+        //dd(date_create_from_format('d/m/Y',$fecha_inicio_pre));
+        $fecha_inicio = date('Y-m-d',date_create_from_format('d/m/Y',trim($fecha_inicio_pre))->getTimestamp());
+
+        $fecha_fin_pre =substr($params['daterangepicker'],strpos($params['daterangepicker'],'-')+2);
+        $fecha_fin = date('Y-m-d',date_create_from_format('d/m/Y',trim($fecha_fin_pre))->getTimestamp());
+
+        while (($emapData = fgetcsv($dctos_file, 10000, ",")) !== FALSE){
+            $cont_fila++;
+            if($cont_fila > 1)
+            {
+                
+                $id_vehiculo = trim($emapData[0]);
+                $descuento = trim($emapData[10]);
+                //dd($id_vehiculo,$descuento);
+                $vehiculo = DB::table('Vehiculo')->where('IdVehiculo',$id_vehiculo);
+                if($vehiculo->exists()){
+                    $conductor = DB::table('Conductor')->where('IdVehiculo',$vehiculo->first()->IdVehiculoSistema)->first();
+                    DB::table('Descuento')->insert([
+                                                    'IdConductor'=> $conductor->IdConductorSistema,
+                                                    'FechaInicio'=> $fecha_inicio,
+                                                    'FechaFin'=> $fecha_fin,
+                                                    'MontDscto'=> $descuento
+                                                    ]);
+                    $cont++;
+                }
+            }
+            
+        }
+        $response->status = 1;
+        $response->numFilas = $cont;
+        return json_encode($response);
+      
     }
 
 }

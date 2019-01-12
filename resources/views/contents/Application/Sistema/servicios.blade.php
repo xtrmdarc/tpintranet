@@ -11,16 +11,41 @@
         <div class="title_left">
           <h3 class="title text-primary">Servicios</h3>
         </div>
-
-        <div class="title_right">
-          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
-              </span>
-            </div>
-          </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <form ></form>
+          <form action="/Sistema/BuscarServicios" method="POST">
+            @csrf
+              <div class="col-sm-3">
+                  <label > Escoge el periodo</label>
+                  <div class="form-horizontal">
+                  <fieldset>
+                    <div class="control-group">
+                      <div class="controls">
+                          <div class="input-prepend input-group">
+                              <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                              <input type="text"  name="daterangepicker" id="periodo_servicios" class="form-control " value="{{Request()->daterangepicker?Request()->daterangepicker :''}}" />
+                          </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  </div>
+              </div>
+              <div class="form-group col-sm-3">
+                <label for="vehiculo_id">Escoge la Móvil</label>
+                <input type="hidden" name="ac_movil_id"  id="ac_movil_id" value="{{Request()->ac_movil_id?Request()->ac_movil_id :''}}">
+                <input type="text" name="ac_movil" id="ac_movil" class="form-control" placeholder="M020" value="{{Request()->ac_movil?Request()->ac_movil:''}}">
+              </div>
+              <div class="form-group col-sm-3">
+                <label for="vehiculo_id">Escoge el cliente</label>
+                <input type="hidden" name="ac_cliente_id" id="ac_cliente_id" value="{{Request()->ac_cliente_id?Request()->ac_cliente_id :''}}">
+                <input type="text" name="ac_cliente" id="ac_cliente" class="form-control" placeholder="AQUAPRODUCT" value="{{Request()->ac_cliente?Request()->ac_cliente :''}}">
+              </div>
+              <div class="form-group col-sm-3">
+                <label> &nbsp; </label>
+                <input type="submit" id="btn_buscar_servicios" class="btn btn-primary form-control" value="Buscar">
+              </div>
+          </form>
         </div>
       </div>
 
@@ -43,7 +68,7 @@
             </div>
             <div class="x_content">
 
-              <table class="table">
+              <table id="table_servicios" class="table">
                 <thead>
                   <tr>
                     <th>Num. Vale</th>
@@ -85,9 +110,6 @@
                     @endforeach
                 </tbody>
               </table>
-              <div class="row" style="float:right">
-                {{ $servicios->links() }}
-              </div>
               
             </div>
           </div>
@@ -104,4 +126,49 @@
 
 @section('scripts')
     <script src="{{URL::to('Application/Sistema/Servicios.js')}}"></script>
+    <script type="text/javascript">
+      $(function(){
+          $('#table_servicios').DataTable({
+            'searching':false,
+            'language':{
+                url:'//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'
+            } 
+          });
+          $('input[name="daterangepicker"]').daterangepicker({
+              "locale": {
+                  "format": "DD/MM/YYYY",
+                  "separator": " - ",
+                  "applyLabel": "Aplicar",
+                  "cancelLabel": "Cancelar",
+                  "fromLabel": "Desde",
+                  "toLabel": "Hasta",
+                  "customRangeLabel": "Personalizado",
+                  "daysOfWeek": [
+                      "Do",
+                      "Lu",
+                      "Ma",
+                      "Mie",
+                      "Ju",
+                      "Vi",
+                      "Sa"
+                  ],
+                  "monthNames": [
+                      "Enero",
+                      "Febrero",
+                      "Marzo",
+                      "Abril",
+                      "Mayo",
+                      "Junio",
+                      "Julio",
+                      "Augosto",
+                      "Septiembre",
+                      "Octubre",
+                      "Noviembre",
+                      "Diciembre"
+                  ],
+                  "firstDay": 1
+              }
+          })
+      });
+  </script>
 @endsection
