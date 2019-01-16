@@ -1,5 +1,5 @@
 var clientes_facturar=[];
-
+var igv; 
 $(function(){
     //$('.selectpicker').selectpicker();
 });
@@ -52,8 +52,8 @@ function servicio_checked(x,y){
     }
 
     cliente_obj.subtotal = Math.abs(cliente_obj.subtotal*1.00);
-    cliente_obj.igv = cliente_obj.subtotal*0.17;
-    cliente_obj.total = cliente_obj.subtotal*1.17;
+    cliente_obj.igv = cliente_obj.subtotal*igv;
+    cliente_obj.total = cliente_obj.subtotal*(1+igv);
 
     $('#'+cliente_obj.subtotal_html).text('S/. '+ cliente_obj.subtotal.toFixed(2));
     $('#'+cliente_obj.igv_html).text('S/. '+ cliente_obj.igv.toFixed(2));
@@ -97,6 +97,11 @@ function preProcesarComprobanteCredito(id_cliente){
     $('#comprobante_cb').val(1);
     $('#es_credito').val(1);
     $('#id_cliente').val(cliente_seleccionado.IdCliente);
+    //Reset form state
+    $('#igv_cb').prop('checked',true).change();
+    $('#dv_btn_exportar_excel').css('display','none');
+    $('#cf_cred_btn_procesar').css('display','block');
+    $('#cf_cred_btn_procesar').prop('disabled',false);
     var servicios_seleccionados_html = ``;
     $('#table-mdl-comprobante tbody').empty();
     servicios_seleccionados.forEach(servicio => {
@@ -123,11 +128,13 @@ $('#frm-procesar-comprobante').on('submit',function(event){
     var esCredito = $('#es_credito').val();
     var tipo_comprobante = $('#comprobante_cb').val();
     var id_cliente = $('#id_cliente').val();
+    var igv_exon = $('#input[name="igv_exon"]:checked').val();
     var identificador_comprobante = $('#identificador_comprobante').val();
+    $('#cf_cred_btn_procesar').prop('disabled',true);
     if(esCredito == 1){
         
         var cliente_a_procesar = clientes_facturar.find(c=> c.IdCliente == id_cliente );
-        var servicios = cliente_a_procesar.servicios;
+        var servicios_seleccionados = (clientes_facturar.find(c=> c.IdCliente == id_cliente )).servicios.filter(s=> s.checked == true);
         if(tipo_comprobante == 1){
             
         }
@@ -142,7 +149,8 @@ $('#frm-procesar-comprobante').on('submit',function(event){
                 IdCliente: cliente_a_procesar.IdCliente,
                 IdTipoComprobante: tipo_comprobante,
                 Identificador: identificador_comprobante,
-                servicios: servicios
+                servicios: servicios_seleccionados,
+                IgvExon: igv_exon
                 
             },
             url:   '/Administracion/ProcesarComprobante',
@@ -155,7 +163,9 @@ $('#frm-procesar-comprobante').on('submit',function(event){
             success: function(data) {
                 if(data == 1)
                 {
-                    
+                    //$('#mdl-procesar-comprobante').modal('hide');
+                    $('#dv_btn_exportar_excel').css('display','block');
+                    $('#cf_cred_btn_procesar').css('display','none');
                 }
                 else alert('error contactese con el administrador');
             }
@@ -168,6 +178,30 @@ $('#frm-procesar-comprobante').on('submit',function(event){
 
 });
 
+$('input[name="igv_exon"').on('change',function(event){
+    var cb = $(event.target);
+    var cb_id = cb.attr('id');
+    var id_cliente = $('#id_cliente').val();
+    var cliente_seleccionado = clientes_facturar.find(c=>c.IdCliente == id_cliente);
+    if(cb_id == 'igv_cb')
+    {
+        $('#tr_subtotal_pro_fact').css('visibility','visible');
+        $('#tr_igv_pro_fact').css('visibility','visible');
+        
+        cliente_seleccionado.igv = cliente_seleccionado.subtotal*(igv);
+        cliente_seleccionado.total = cliente_seleccionado.subtotal*(1+igv);
+        $('#cf_cred_mdl_total').text('S/. ' +cliente_seleccionado.total.toFixed(2));
+    }
+    else if(cb_id == 'exonerado_cb')
+    {
+        $('#tr_subtotal_pro_fact').css('visibility','hidden');
+        $('#tr_igv_pro_fact').css('visibility','hidden');
+       
+        cliente_seleccionado.igv = 0;
+        cliente_seleccionado.total = cliente_seleccionado.subtotal;
+        $('#cf_cred_mdl_total').text('S/. ' +cliente_seleccionado.total.toFixed(2));
+    }
+});
 
 /*
 function procesarComprobante()

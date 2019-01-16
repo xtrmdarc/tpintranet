@@ -73,4 +73,14 @@ class ClientesController extends Controller
         return redirect('/Administracion/Clientes');
 
     }
+
+    public function BuscarClienteXId(Request $request)
+    {
+        $data = $request->all();
+        $cliente_buscado = DB::table('Cliente')->where('IdClienteSistema',$data['ac_cliente_id'])->first();
+        $response =[];
+        $response[] = $cliente_buscado;
+        return json_encode($response);
+
+    }
 }

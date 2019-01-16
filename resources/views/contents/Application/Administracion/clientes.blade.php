@@ -17,9 +17,9 @@
         @csrf
          
         <div class="form-group col-sm-3">
-            <label for="vehiculo_id">Escoge el cliente</label>
+            <label for="ac_cliente">Escoge el cliente</label>
             <input type="hidden" name="ac_cliente_id" id="ac_cliente_id" value="{{Request()->ac_cliente_id?Request()->ac_cliente_id :''}}">
-            <input type="text" name="ac_cliente" id="ac_cliente" class="form-control" placeholder="AQUAPRODUCT" value="{{Request()->ac_cliente?Request()->ac_cliente :''}}">
+            <input type="text" name="ac_cliente" id="ac_cliente" class="form-control" placeholder="ACCUAPRODUCT" value="{{Request()->ac_cliente?Request()->ac_cliente :''}}">
         </div>
         
         <div class="form-group col-sm-3">
@@ -156,12 +156,13 @@
 @section('scripts')
   <script src="{{URL::to('Application/Administracion/Clientes.js')}}"></script> 
   <script>
+    /*
     cliente_table = $('#table_cliente').DataTable({
               'searching':false,
               'language':{
                   url:'//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'
               } 
             });
-    
+    */
   </script>
 @endsection

@@ -138,7 +138,11 @@
         <div class="modal-dialog " role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="mdl-carga-servicios-title">Nuevo Comprobante</h4>
+                <div class="row">
+                    <h4 class="modal-title col-sm-8" id="mdl-carga-servicios-title">Nuevo Comprobante</h4>
+                    
+                </div>
+
             </div>
             <div class="modal-body">
 
@@ -166,6 +170,20 @@
                         </select>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">Facturación</label>
+                        <div class="col-sm-9">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="igv_exon" id="igv_cb" value="1" checked="checked">
+                                <label class="form-check-label" for="igv_cb">Con Igv</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="igv_exon" id="exonerado_cb" value="2">
+                                <label class="form-check-label" for="exonerado_cb">Exonerado</label>
+                            </div>
+                        </div>
+                        
+                    </div>
                     <div class="form-group row ">
                         <label for="identificador_comprobante" class="col-sm-3 col-form-label">Identificador</label>
                         <div class="col-sm-9">
@@ -188,7 +206,7 @@
 
                         </tbody>
                         <tfoot>
-                            <tr>
+                            <tr id="tr_subtotal_pro_fact">
                                 <td ></td>  
                                 <td></td>
                                 <td></td>
@@ -196,7 +214,7 @@
                                 <td id="cf_cred_mdl_subtotal" class="text-right" >S/. 0.00</td>
                                 
                             </tr>
-                            <tr>
+                            <tr id="tr_igv_pro_fact">
                                 <td></td>  
                                 <td></td>
                                 <td></td>
@@ -204,7 +222,7 @@
                                 <td id="cf_cred_mdl_igv" class="text-right" >S/. 0.00</td>
                                 
                             </tr>
-                            <tr>
+                            <tr id="tr_total_pro_fact">
                                 <td></td>  
                                 <td></td>
                                 <td></td>
@@ -216,17 +234,25 @@
                                 <td></td>  
                                 <td></td>
                                 <td></td>
-                                <td class="text-right"  colspan="2" style="padding:0px"> <button class="btn btn-primary" id="cf_cred_btn_procesar_{{$cliente->IdCliente}}" style="margin:0px;width:100%" value="Procesar">Procesar</button> </td> 
+                                <td class="text-right"  colspan="2" style="padding:0px"> <button class="btn btn-primary" id="cf_cred_btn_procesar" style="margin:0px;width:100%" value="Procesar">Procesar</button></td> 
                                 
                             </tr>
-                        </tfoot>
+                        </tfoot>    
                     </table>
                     
                     <!-- <button type="button" class="btn btn-primary">Procesar</button> !-->
                     
                 </form>
+
+                <div id="dv_btn_exportar_excel" style="display:none;" >
+                    <form class="form"  action="/Administracion/ExportarComprobanteExcel" target="_blank" method="POST"  >
+                        @csrf
+                        <input type="hidden" id="id_comprobante" name="id_comprobante" />
+                        <button id="" class="btn btn-success form-control" type="submit" > Exportar </button>
+                    </form>
+                </div> 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.replace('/Administracion/CFacturacion')" >Cancelar</button>
                 
                 
             </div>
@@ -240,12 +266,14 @@
 @section('scripts')
     <script src="{{URL::to('Application/Administracion/ControlFacturacion.js')}}"></script> 
     <script type="text/javascript">
-
+    
     $(function(){
 //        console.log({!! json_encode($clientes_cred) !!});
+        igv = {!! $igv !!};
         console.log(@json($clientes_cred));
         CargarClientesFacturar(@json($clientes_cred));
-        $('#mdl-procesar-comprobante').modal('show');
+        //$('#mdl-procesar-comprobante').modal('show');
+
     });
 
 </script>

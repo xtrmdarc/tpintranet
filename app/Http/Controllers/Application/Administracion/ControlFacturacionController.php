@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Application\Administracion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Excel\ExportFromArray;
 
 class ControlFacturacionController extends Controller
 {
@@ -42,10 +44,13 @@ class ControlFacturacionController extends Controller
 
         $tipo_comprobantes = DB::table('TipoComprobante')->get();
         $clientes = DB::table('Cliente')->select('NombreCliente','IdClienteSistema')->get();
+        $igv = DB::table('VariablesEntorno')->first()->Igv;
+        
         $data = [
             'clientes_cred' => $clientes_cred,
             'tipo_comprobantes' => $tipo_comprobantes,
-            'clientes'=> $clientes
+            'clientes'=> $clientes,
+            'igv' => (float)$igv
         ];
         
         return view('contents.Application.Administracion.control_facturacion')->with($data);
@@ -90,8 +95,22 @@ class ControlFacturacionController extends Controller
         foreach($data['servicios'] as $servicio ){
             $servicios_id[] = $servicio['IdServicioSistema'];
         }
-
+        
         DB::table('Servicio')->whereIn('IdServicioSistema',$servicios_id)->update(['ServicioProcesado'=>1,'IdComprobante'=>$comprobante_id,'NumComprobante'=>$indentificador_cp]);
+
+        return json_encode(1);
+    }
+
+    public function ExportarComprobanteExcel(Request $request)
+    {
+        $data = $request->all();
+        $servicios_comprobante = DB::table('v_sis_servicios')
+                                ->where('IdComprobante',$data['id_comprobante'])->get();
+
+        $comprobante_actual = DB::table('Comprobante',$data['id_comprobante'])->first();
+
+        return Excel::download(new ExportFromArray($servicios_comprobante),'Comprobante_'.$comprobante_actual->Identificador.'.xlsx');
+
     }
     
 }
