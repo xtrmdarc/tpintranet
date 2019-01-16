@@ -26,5 +26,10 @@ Route::post('/RegistroUsuarioRequest','Application\Sistema\AjusteUsuariosControl
 
 Route::get('/ListaUsuarios','Application\Sistema\AjusteUsuariosController@listar_usuario');
 
+Route::prefix('Usuarios')->group(function(){
+    
+    Route::get('EditarUsuario/{usuario_id}','Application\Sistema\AjusteUsuariosController@editar_usuario');
+
+});
 
 

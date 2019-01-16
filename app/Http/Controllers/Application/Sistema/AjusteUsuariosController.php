@@ -11,6 +11,7 @@ class AjusteUsuariosController extends Controller
     //
     public function index()
     {
+        
         return view ('contents.application.sistema.editorusuarios');
     }
 
@@ -19,6 +20,16 @@ class AjusteUsuariosController extends Controller
         $usuarios=DB::table('UsuarioSis')->paginate(10);
         $data=[ 'usuarios'=>$usuarios];
         return view('contents.application.sistema.listausuarios')->with($data);
+    }
+
+    public function editar_usuario($usuario_id)
+    {
+        $usuario = DB::table('UsuarioSis')->where('IDUsuarioSis',$usuario_id)->first();
+        $data =[
+            'usuario' => $usuario
+        ];
+
+        return view('contents.application.sistema.editorusuarios')->with($data);
     }
 
     public function RegistroUsuarioRequest(Request $request)
@@ -31,7 +42,6 @@ class AjusteUsuariosController extends Controller
         $DNIUsuario=$data['dni'];
         $IDRol=$data['rol'];
         $PasswordUsuario=$data['password'];
-
         DB::table('UsuarioSis')->insert
         (
             [
