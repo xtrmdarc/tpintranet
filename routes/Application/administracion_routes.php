@@ -16,6 +16,7 @@
         Route::get('CFacturacion','Application\Administracion\ControlFacturacionController@index');
         Route::post('ProcesarComprobante','Application\Administracion\ControlFacturacionController@procesarComprobante');
         Route::post('ExportarComprobanteExcel','Application\Administracion\ControlFacturacionController@ExportarComprobanteExcel');
+        Route::post('BuscarServiciosContado','Application\Administracion\ControlFacturacionController@BuscarServiciosContado');
         
         //Tarifario
         Route::get('TarifarioMatriz','Application\Administracion\TarifarioMatrixController@index');

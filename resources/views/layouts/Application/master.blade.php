@@ -293,7 +293,45 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{URL::to('build/js/custom.min.js')}}"></script>
-    
+    <script type="text/javascript">
+      $(function(){
+          $('input[name="daterangepicker"]').daterangepicker({
+              "locale": {
+                  "format": "DD/MM/YYYY",
+                  "separator": " - ",
+                  "applyLabel": "Aplicar",
+                  "cancelLabel": "Cancelar",
+                  "fromLabel": "Desde",
+                  "toLabel": "Hasta",
+                  "customRangeLabel": "Personalizado",
+                  "daysOfWeek": [
+                      "Do",
+                      "Lu",
+                      "Ma",
+                      "Mie",
+                      "Ju",
+                      "Vi",
+                      "Sa"
+                  ],
+                  "monthNames": [
+                      "Enero",
+                      "Febrero",
+                      "Marzo",
+                      "Abril",
+                      "Mayo",
+                      "Junio",
+                      "Julio",
+                      "Augosto",
+                      "Septiembre",
+                      "Octubre",
+                      "Noviembre",
+                      "Diciembre"
+                  ],
+                  "firstDay": 1
+              }
+          })
+      });
+  </script>
     @yield("scripts")
 	
   </body>

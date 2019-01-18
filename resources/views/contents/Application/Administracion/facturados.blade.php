@@ -116,10 +116,9 @@
                             <tr>
                                 <th>Num. Vale</th>
                                 <th>Fecha Servicio</th>
-                                <th style="width:45%">Usuario</th>
+                                <th >Usuario</th>
                                 <th></th>
                                 <th class="text-right" >Monto</th>
-                                
                                 
                             </tr>
                         </thead>
@@ -185,45 +184,7 @@
 @section('scripts')
     
     <script src="{{URL::to('Application/Administracion/Facturados.js')}}"></script> 
-    <script type="text/javascript">
-        $(function(){
-            $('input[name="daterangepicker"]').daterangepicker({
-                "locale": {
-                    "format": "DD/MM/YYYY",
-                    "separator": " - ",
-                    "applyLabel": "Aplicar",
-                    "cancelLabel": "Cancelar",
-                    "fromLabel": "Desde",
-                    "toLabel": "Hasta",
-                    "customRangeLabel": "Personalizado",
-                    "daysOfWeek": [
-                        "Do",
-                        "Lu",
-                        "Ma",
-                        "Mie",
-                        "Ju",
-                        "Vi",
-                        "Sa"
-                    ],
-                    "monthNames": [
-                        "Enero",
-                        "Febrero",
-                        "Marzo",
-                        "Abril",
-                        "Mayo",
-                        "Junio",
-                        "Julio",
-                        "Augosto",
-                        "Septiembre",
-                        "Octubre",
-                        "Noviembre",
-                        "Diciembre"
-                    ],
-                    "firstDay": 1
-                }
-            })
-        });
-    </script>
+    
 
 @endsection
 

@@ -1,4 +1,5 @@
 var clientes_facturar=[];
+var grupos_facturar_cont =[];
 var igv; 
 $(function(){
     //$('.selectpicker').selectpicker();
@@ -92,6 +93,12 @@ function preProcesarComprobanteCredito(id_cliente){
     var servicios_seleccionados = (clientes_facturar.find(c=> c.IdCliente == id_cliente )).servicios.filter(s=> s.checked == true);
     $('#mdl-procesar-comprobante').modal('show');
     console.log(cliente_seleccionado);
+    
+    $('#btn-mdl-procesar-cerrar').attr('onclick','window.location.replace("/Administracion/CFacturacion")');
+    $('#btn-mdl-procesar-cerrar').attr('data-dismiss','');
+
+    $('#div_cliente_cb').css('display','block');
+    $('#cliente_cb').prop('required',true);
     $('#cliente_cb').val(cliente_seleccionado.IdCliente);
     $('#cliente_cb').selectpicker('refresh');
     $('#comprobante_cb').val(1);
@@ -128,80 +135,297 @@ $('#frm-procesar-comprobante').on('submit',function(event){
     var esCredito = $('#es_credito').val();
     var tipo_comprobante = $('#comprobante_cb').val();
     var id_cliente = $('#id_cliente').val();
-    var igv_exon = $('#input[name="igv_exon"]:checked').val();
+    var id_grupo = $('#id_grupo').val();
+    var igv_exon = $('input[name=igv_exon]:checked').val();
     var identificador_comprobante = $('#identificador_comprobante').val();
+    var entidad_procesar ;
+    var servicios_seleccionados;
+    //var sentData = {id_grupo: id_grupo};
     $('#cf_cred_btn_procesar').prop('disabled',true);
     if(esCredito == 1){
         
-        var cliente_a_procesar = clientes_facturar.find(c=> c.IdCliente == id_cliente );
-        var servicios_seleccionados = (clientes_facturar.find(c=> c.IdCliente == id_cliente )).servicios.filter(s=> s.checked == true);
+        entidad_procesar = clientes_facturar.find(c=> c.IdCliente == id_cliente );
+        servicios_seleccionados = (clientes_facturar.find(c=> c.IdCliente == id_cliente )).servicios.filter(s=> s.checked == true);
         if(tipo_comprobante == 1){
             
         }
         else{
-    
+           
         }
-        $.ajax({
-            data: {
-                MontSubTotal:  cliente_a_procesar.subtotal,
-                MontIgv: cliente_a_procesar.igv ,
-                MontTotal: cliente_a_procesar.total,
-                IdCliente: cliente_a_procesar.IdCliente,
-                IdTipoComprobante: tipo_comprobante,
-                Identificador: identificador_comprobante,
-                servicios: servicios_seleccionados,
-                IgvExon: igv_exon
-                
+        
+    }
+    else if(esCredito==0){
+
+        entidad_procesar = grupos_facturar_cont.find(g=> g.id == id_grupo );
+        servicios_seleccionados = (grupos_facturar_cont.find(g=> g.id == id_grupo )).servicios;
+
+        if(tipo_comprobante == 1){
+            
+        }
+        else{
+           
+        }
+    }
+
+    $.ajax({
+        data: {
+            MontSubTotal:  entidad_procesar.subtotal,
+            MontIgv: entidad_procesar.igv ,
+            MontTotal: entidad_procesar.total,
+            IdCliente: esCredito ==1 ? entidad_procesar.IdCliente:0,
+            IdTipoComprobante: tipo_comprobante,
+            Identificador: identificador_comprobante,
+            IgvExon: igv_exon,
+            servicios: servicios_seleccionados
+        },
+        url:   '/Administracion/ProcesarComprobante',
+        type:  'POST',
+        dataType: 'json',
+        dataSrc:"",
+        headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url:   '/Administracion/ProcesarComprobante',
-            type:  'POST',
-            dataType: 'json',
-            dataSrc:"",
-            headers:{
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-            success: function(data) {
-                if(data == 1)
+        success: function(respuesta) {
+            console.log(id_grupo);
+            console.log(esCredito);
+            //console.log(grupos_facturar_cont[sentData.id_grupo]);
+            if(respuesta.cod == 1)
+            {
+                //$('#mdl-procesar-comprobante').modal('hide');
+                if(esCredito == 0)
                 {
-                    //$('#mdl-procesar-comprobante').modal('hide');
-                    $('#dv_btn_exportar_excel').css('display','block');
-                    $('#cf_cred_btn_procesar').css('display','none');
+                    $('#'+grupos_facturar_cont[id_grupo].div_grupo_html).remove();
                 }
-                else alert('error contactese con el administrador');
+                $('#dv_btn_exportar_excel').css('display','block');
+                $('#cf_cred_btn_procesar').css('display','none');
+                $('#id_comprobante').val(respuesta.id_comprobante);                
             }
-        });
-    }
-    else{
-
-    }
+            else alert('error contactese con el administrador');
+        }
+    });
     
-
 });
 
 $('input[name="igv_exon"').on('change',function(event){
     var cb = $(event.target);
     var cb_id = cb.attr('id');
-    var id_cliente = $('#id_cliente').val();
-    var cliente_seleccionado = clientes_facturar.find(c=>c.IdCliente == id_cliente);
-    if(cb_id == 'igv_cb')
+    var id_tipo_comprobante = $('#comprobante_cb').val();
+    if(id_tipo_comprobante == 1)
     {
-        $('#tr_subtotal_pro_fact').css('visibility','visible');
-        $('#tr_igv_pro_fact').css('visibility','visible');
+        var id_cliente = $('#id_cliente').val();
+        var cliente_seleccionado = clientes_facturar.find(c=>c.IdCliente == id_cliente);
+        if(cb_id == 'igv_cb')
+        {
+            $('#tr_subtotal_pro_fact').css('visibility','visible');
+            $('#tr_igv_pro_fact').css('visibility','visible');
+            
+            cliente_seleccionado.igv = cliente_seleccionado.subtotal*(igv);
+            cliente_seleccionado.total = cliente_seleccionado.subtotal*(1+igv);
+            $('#cf_cred_mdl_total').text('S/. ' +cliente_seleccionado.total.toFixed(2));
+        }
+        else if(cb_id == 'exonerado_cb')
+        {
+            $('#tr_subtotal_pro_fact').css('visibility','hidden');
+            $('#tr_igv_pro_fact').css('visibility','hidden');
         
-        cliente_seleccionado.igv = cliente_seleccionado.subtotal*(igv);
-        cliente_seleccionado.total = cliente_seleccionado.subtotal*(1+igv);
-        $('#cf_cred_mdl_total').text('S/. ' +cliente_seleccionado.total.toFixed(2));
+            cliente_seleccionado.igv = 0;
+            cliente_seleccionado.total = cliente_seleccionado.subtotal;
+            $('#cf_cred_mdl_total').text('S/. ' +cliente_seleccionado.total.toFixed(2));
+        }
     }
-    else if(cb_id == 'exonerado_cb')
+    else if(id_tipo_comprobante==2)
     {
-        $('#tr_subtotal_pro_fact').css('visibility','hidden');
-        $('#tr_igv_pro_fact').css('visibility','hidden');
-       
-        cliente_seleccionado.igv = 0;
-        cliente_seleccionado.total = cliente_seleccionado.subtotal;
-        $('#cf_cred_mdl_total').text('S/. ' +cliente_seleccionado.total.toFixed(2));
+        var id_grupo = $('#id_grupo').val();
+        var grupo_seleccionado = grupos_facturar_cont.find(g => g.id == id_grupo);
+        if(cb_id == 'igv_cb')
+        {
+            $('#tr_subtotal_pro_fact').css('visibility','visible');
+            $('#tr_igv_pro_fact').css('visibility','visible');
+            
+            grupo_seleccionado.igv = grupo_seleccionado.subtotal*(igv);
+            grupo_seleccionado.total = grupo_seleccionado.subtotal*(1+igv);
+            $('#cf_cred_mdl_total').text('S/. ' +grupo_seleccionado.total.toFixed(2));
+        }
+        else if(cb_id == 'exonerado_cb')
+        {
+            $('#tr_subtotal_pro_fact').css('visibility','hidden');
+            $('#tr_igv_pro_fact').css('visibility','hidden');
+            
+            grupo_seleccionado.igv = 0;
+            grupo_seleccionado.total = grupo_seleccionado.subtotal;
+            $('#cf_cred_mdl_total').text('S/. ' +grupo_seleccionado.total.toFixed(2));
+        }
     }
+        
 });
+
+$('#frm-contado-facturacion-buscar').on('submit',function(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var form = $(e.target);
+    $.ajax({
+        url: '/Administracion/BuscarServiciosContado',
+        data: {
+            start_date : $('#periodo_contados').data('daterangepicker').startDate.format('DD/MM/YY'),
+            end_date : $('#periodo_contados').data('daterangepicker').endDate.format('DD/MM/YY')
+        },
+        type: 'POST',
+        dataType: 'json',
+        headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+        success: function(grupos){
+
+            CargarGruposFacturacionContado(grupos);
+    
+        }
+    });
+});
+
+function CargarGruposFacturacionContado(grupos){
+
+    grupos_facturar_cont = grupos;
+    
+    
+    var grupos_facturar_html = ``;
+    for(var i = 0; i< grupos_facturar_cont.length ; i++ )
+    {
+        var servicios_facturar_cont = ``;
+        for(var j = 0; j< grupos_facturar_cont[i].servicios.length; j++)
+        {
+            servicios_facturar_cont+= ` <tr>
+                                            <td>${grupos_facturar_cont[i].servicios[j].NumVale} </td>  
+                                            <td>${grupos_facturar_cont[i].servicios[j].FechaServicio}</td>
+                                            <td> ${grupos_facturar_cont[i].servicios[j].NombreUsuario}</td>
+                                            <td></td>
+                                            <td class="text-right" > ${'S/. ' +grupos_facturar_cont[i].servicios[j].MontContado} </td>
+                                        </tr>`;
+            //console.log(grupos_facturar_cont[i].servicios[j]);
+        }
+        grupos_facturar_cont[i].subtotal = grupos_facturar_cont[i].suma_total;
+        grupos_facturar_cont[i].igv = 0;
+        grupos_facturar_cont[i].total = grupos_facturar_cont[i].subtotal;
+        grupos_facturar_cont[i].id = i;
+
+        //asignar htmls
+        grupos_facturar_cont[i].div_grupo_html = 'cf-cont-grupo-'+i;
+        grupos_facturar_html += 
+            `
+            <div id="cf-cont-grupo-${i}" class="cf-cred-cliente row"   >    
+                <a  data-toggle="collapse" href="#cf-cont-body-${i}">
+                    <div class="cf-cred-cliente-header col-xs-12">
+                        <h2 class="title">Servicios Varios ${i+1}</h2>
+                        <p class="text-secondary-gray" style="display:inline-block">${grupos_facturar_cont[i].servicios.length } servicios por facturar</p> 
+                    </div>
+                </a>
+                
+                <div id="cf-cont-body-${i}" class="cf-cred-cliente-body collapse" >
+                    <table class="table clearfix ">
+                        <thead>
+                        <tr>
+                            <th>Num. Vale</th>
+                            <th>Fecha Servicio</th>
+                            <th style="width:40%">Usuario</th>
+                            <th></th>
+                            <th class="text-right" >Monto</th>
+
+                        </tr>
+                        </thead>
+                            
+                        <tbody >`+
+                        servicios_facturar_cont
+                            +`
+                        </tbody>
+                        <tfoot>
+                            <tr style="visibility:hidden">
+                                <td ></td>  
+                                <td></td>
+                                <td></td>
+                                <td><b>Sub Total</b></td>
+                                <td id="cf_cont_subtotal_${i}"   class="text-right" >S/. ${grupos_facturar_cont[i].subtotal.toFixed(2)}</td>
+                                <td></td>
+                            </tr>
+                            <tr style="visibility:hidden">
+                                <td></td>  
+                                <td></td>
+                                <td></td>
+                                <td ><b>IGV</b></td>
+                                <td id="cf_cont_igv_${i}"  style="visibility:hidden" class="text-right" >S/. ${grupos_facturar_cont[i].igv.toFixed(2)}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>  
+                                <td></td>
+                                <td></td>
+                                <td ><b>Total</b></td>
+                                <td id="cf_cont_total_${i}" class="text-right" >S/. ${grupos_facturar_cont[i].total.toFixed(2)}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>  
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right" > <button class="btn btn-primary" id="cf_cont_btn_procesar_${i}" style="margin:0px;" value="Procesar" onclick="preProcesarComprobanteContado(${i})">Procesar</button> </td> 
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                        
+                    </table>
+                    
+                </div>
+            </div>    
+            `;
+
+        servicios_facturar_cont = ``;
+
+    }
+    $('#cf-cont-grupos-div').empty();
+    $('#cf-cont-grupos-div').append(grupos_facturar_html);
+    
+}
+
+function preProcesarComprobanteContado(id_grupo){
+    var grupo_seleccionado =grupos_facturar_cont.find(g=> g.id == id_grupo );
+    var servicios_seleccionados = (grupos_facturar_cont.find(g=> g.id == id_grupo )).servicios;
+    $('#mdl-procesar-comprobante').modal('show');
+    $('#btn-mdl-procesar-cerrar').attr('onclick','');
+    $('#btn-mdl-procesar-cerrar').attr('data-dismiss','modal');
+    //console.log(cliente_seleccionado);
+    //$('#cliente_cb').val(cliente_seleccionado.IdCliente);
+    $('#div_cliente_cb').css('display','none');
+    $('#cliente_cb').prop('required',false);
+    //$('#cliente_cb').selectpicker('refresh');
+    $('#comprobante_cb').val(2);
+    $('#es_credito').val(0);
+    $('#id_grupo').val(id_grupo);
+    //$('#id_cliente').val(cliente_seleccionado.IdCliente);
+    //Reset form state
+    $('#exonerado_cb').prop('checked',true).change();
+    $('#dv_btn_exportar_excel').css('display','none');
+    $('#cf_cred_btn_procesar').css('display','block');
+    $('#cf_cred_btn_procesar').prop('disabled',false);
+    var servicios_seleccionados_html = ``;
+    $('#table-mdl-comprobante tbody').empty();
+    servicios_seleccionados.forEach(servicio => {
+        
+        servicios_seleccionados_html += `<tr>
+                                            <td>${servicio.NumVale}</td>  
+                                            <td>${servicio.FechaServicio}</td>
+                                            <td>${servicio.NombreUsuario}</td>
+                                            <td></td>
+                                            <td class="text-right" >${'S/. '+servicio.MontContado}</td>
+                                        </tr>`;
+    });
+    //console.log('#cf_cred_mdl_subtotal_'+cliente_seleccionado.IdCliente);
+    /*
+    $('#cf_cred_mdl_subtotal').text('S/. ' +grupo_seleccionado.subtotal.toFixed(2));
+    $('#cf_cred_mdl_igv').text('S/. ' +grupo_seleccionado.igv.toFixed(2));
+    $('#cf_cred_mdl_total').text('S/. ' +grupo_seleccionado.total.toFixed(2));
+    */
+    $('#table-mdl-comprobante tbody').append(servicios_seleccionados_html);   
+}
+
 
 /*
 function procesarComprobante()

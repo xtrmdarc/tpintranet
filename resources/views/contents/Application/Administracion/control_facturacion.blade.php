@@ -26,10 +26,10 @@
         <div class="col-sm-3" >
             <ul class="nav nav-pills" id="myTab" role="tablist" style="margin:auto;">
                 <li class="nav-item active">
-                    <a class="nav-link active" id="cred-tab" data-toggle="pill" href="#cf-cred" role="tab" aria-controls="home" aria-selected="true">Crédito</a>
+                    <a class="nav-link active" id="cred-tab" data-toggle="pill" href="#cf-cred" role="tab" aria-controls="cf-cred" aria-selected="true">Crédito</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="cont-tab" data-toggle="pill" href="#cf-cont" role="tab" aria-controls="profile" aria-selected="false">Contado</a>
+                    <a class="nav-link" id="cont-tab" data-toggle="pill" href="#cf-cont" role="tab" aria-controls="cf-cont" aria-selected="false">Contado</a>
                 </li>
             </ul>
         </div>
@@ -40,90 +40,116 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
            <div class="x_content">
-
-                <div id="cf-cred" role="tabpanel"  class="tab-pane fade in active">
-
-                    @foreach ($clientes_cred as $cliente)
-                    <div id="cf-cred-cliente-{{$cliente->IdCliente}}" class="cf-cred-cliente row"   >
-                            <a  data-toggle="collapse" href="#cf-cred-body-{{$cliente->IdCliente}}">
-                                <div class="cf-cred-cliente-header col-xs-12">
-                                    <h2 class="title">{{$cliente->NombreCliente}}</h2>
-                                    <p class="text-secondary-gray" style="display:inline-block">{{count($cliente->servicios) }} servicios por facturar</p> 
-                                </div>
-                            </a>
-                            
-                            <div id="cf-cred-body-{{$cliente->IdCliente}}" class="cf-cred-cliente-body collapse" >
-                                <table class="table clearfix ">
-                                    <thead>
-                                    <tr>
-                                        <th>Num. Vale</th>
-                                        <th>Fecha Servicio</th>
-                                        <th style="width:40%">Usuario</th>
-                                        <th></th>
-                                        <th class="text-right" >Monto</th>
-                                        <th class="text-center" ><input type="checkbox"  id="cf_cred_cliente_checkbox_{{$cliente->IdCliente}}" onclick="cliente_checked({{$cliente->IdCliente}})"></th>
-                                        
-                                    </tr>
-                                    </thead>
-                                        
-                                    <tbody >
-                                        @foreach ($cliente->servicios as $servicio)
-                                            <tr>
-                                                <td>{{$servicio->NumVale}}</td>  
-                                                <td>{{$servicio->FechaServicio}}</td>
-                                                <td>{{$servicio->NombreUsuario}}</td>
-                                                <td></td>
-                                                <td class="text-right" >{{'S/. '.$servicio->MontTotalCredito}}</td>
-                                                <td class="text-center" ><input type="checkbox" id="cf_cred_serv_checkbox_{{$servicio->IdServicioSistema}}" onclick="servicio_checked({{$cliente->IdCliente}},{{$servicio->IdServicioSistema}})"></td>
-                                            </tr>
-                                        @endforeach
-                                        
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td ></td>  
-                                            <td></td>
-                                            <td></td>
-                                            <td><b>Sub Total</b></td>
-                                            <td id="cf_cred_subtotal_{{$cliente->IdCliente}}" class="text-right" >S/. 0.00</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>  
-                                            <td></td>
-                                            <td></td>
-                                            <td ><b>IGV</b></td>
-                                            <td id="cf_cred_igv_{{$cliente->IdCliente}}" class="text-right" >S/. 0.00</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>  
-                                            <td></td>
-                                            <td></td>
-                                            <td ><b>Total</b></td>
-                                            <td id="cf_cred_total_{{$cliente->IdCliente}}" class="text-right" >S/. 0.00</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>  
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="text-right" > <button class="btn btn-primary" id="cf_cred_btn_procesar_{{$cliente->IdCliente}}" style="margin:0px;" value="Procesar" onclick="preProcesarComprobanteCredito({{$cliente->IdCliente}})">Procesar</button> </td> 
-                                            <td></td>
-                                        </tr>
-                                    </tfoot>
+                <div class="tab-content">
+                        <div id="cf-cred" role="tabpanel"  class="tab-pane fade in active">
+                            @foreach ($clientes_cred as $cliente)
+                            <div id="cf-cred-cliente-{{$cliente->IdCliente}}" class="cf-cred-cliente row"   >
+                                    <a  data-toggle="collapse" href="#cf-cred-body-{{$cliente->IdCliente}}">
+                                        <div class="cf-cred-cliente-header col-xs-12">
+                                            <h2 class="title">{{$cliente->NombreCliente}}</h2>
+                                            <p class="text-secondary-gray" style="display:inline-block">{{count($cliente->servicios) }} servicios por facturar</p> 
+                                        </div>
+                                    </a>
                                     
-                                </table>
-                                
+                                    <div id="cf-cred-body-{{$cliente->IdCliente}}" class="cf-cred-cliente-body collapse" >
+                                        <table class="table clearfix ">
+                                            <thead>
+                                            <tr>
+                                                <th>Num. Vale</th>
+                                                <th>Fecha Servicio</th>
+                                                <th style="width:40%">Usuario</th>
+                                                <th></th>
+                                                <th class="text-right" >Monto</th>
+                                                <th class="text-center" ><input type="checkbox"  id="cf_cred_cliente_checkbox_{{$cliente->IdCliente}}" onclick="cliente_checked({{$cliente->IdCliente}})"></th>
+                                                
+                                            </tr>
+                                            </thead>
+                                                
+                                            <tbody >
+                                                @foreach ($cliente->servicios as $servicio)
+                                                    <tr>
+                                                        <td>{{$servicio->NumVale}}</td>  
+                                                        <td>{{$servicio->FechaServicio}}</td>
+                                                        <td>{{$servicio->NombreUsuario}}</td>
+                                                        <td></td>
+                                                        <td class="text-right" >{{'S/. '.$servicio->MontTotalCredito}}</td>
+                                                        <td class="text-center" ><input type="checkbox" id="cf_cred_serv_checkbox_{{$servicio->IdServicioSistema}}" onclick="servicio_checked({{$cliente->IdCliente}},{{$servicio->IdServicioSistema}})"></td>
+                                                    </tr>
+                                                @endforeach
+                                                
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td ></td>  
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><b>Sub Total</b></td>
+                                                    <td id="cf_cred_subtotal_{{$cliente->IdCliente}}" class="text-right" >S/. 0.00</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>  
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td ><b>IGV</b></td>
+                                                    <td id="cf_cred_igv_{{$cliente->IdCliente}}" class="text-right" >S/. 0.00</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>  
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td ><b>Total</b></td>
+                                                    <td id="cf_cred_total_{{$cliente->IdCliente}}" class="text-right" >S/. 0.00</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>  
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-right" > <button class="btn btn-primary" id="cf_cred_btn_procesar_{{$cliente->IdCliente}}" style="margin:0px;" value="Procesar" onclick="preProcesarComprobanteCredito({{$cliente->IdCliente}})">Procesar</button> </td> 
+                                                    <td></td>
+                                                </tr>
+                                            </tfoot>
+                                            
+                                        </table>
+                                        
+                                    </div>
+                                </div>    
+                            @endforeach
+                            
+        
+                        </div>
+                        
+                        <div id="cf-cont" role="tabpanel" class="tab-pane fade">
+                            <div class="row">
+                                <form id="frm-contado-facturacion-buscar" class="form-horizontal" >
+                                    <div class="col-sm-4">
+                                        <label > Escoge el periodo</label>
+                                        <fieldset>
+                                            <div class="control-group">
+                                            <div class="controls">
+                                                <div class="input-prepend input-group">
+                                                    <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                                                    <input type="text"  name="daterangepicker" id="periodo_contados" class="form-control " />
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label >&nbsp;</label>
+                                        <input type="submit" class="btn btn-primary form-control" value="Buscar">
+                                    </div>
+                                </form>
                             </div>
-                        </div>    
-                    @endforeach
-                    
+                            <div id="cf-cont-grupos-div" >
 
+                            </div>
+                        </div>
                 </div>
                 
-                <div id="cf-cont" role="tabpanel" class="tab-pane fade"> </div>
 
             </div>
           </div>
@@ -148,9 +174,10 @@
 
                 <form id="frm-procesar-comprobante" class="cf-cred-cliente-body">
                     <input type="hidden" id="es_credito" />
+                    <input type="hidden" id="id_grupo" />
                     <input type="hidden" id="id_cliente" />
                     
-                    <div class="form-group row">
+                    <div  id="div_cliente_cb" class="form-group row">
                         <label for="cliente_cb" class="col-sm-3 col-form-label ">Cliente</label>
                         <div class="col-sm-9">
                         <select type="text" title="Ingrese Cliente" class="form-control selectpicker" data-live-search="true" id="cliente_cb" placeholder="AQUAPRODUCT" required>
@@ -248,11 +275,11 @@
                     <form class="form"  action="/Administracion/ExportarComprobanteExcel" target="_blank" method="POST"  >
                         @csrf
                         <input type="hidden" id="id_comprobante" name="id_comprobante" />
-                        <button id="" class="btn btn-success form-control" type="submit" > Exportar </button>
+                        <button class="btn btn-success form-control" type="submit" > Exportar </button>
                     </form>
                 </div> 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="window.location.replace('/Administracion/CFacturacion')" >Cancelar</button>
+                <button id="btn-mdl-procesar-cerrar" type="button" class="btn btn-secondary" onclick="window.location.replace('/Administracion/CFacturacion')" >Cancelar</button>
                 
                 
             </div>
@@ -275,6 +302,8 @@
         //$('#mdl-procesar-comprobante').modal('show');
 
     });
+
+
 
 </script>
 
