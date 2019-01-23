@@ -1,5 +1,5 @@
 $ (function()
-{
+{/*
         $('#myDatepicker').datetimepicker();
         
         $('#myDatepicker2').datetimepicker({
@@ -28,4 +28,6 @@ $ (function()
         $("#datetimepicker7").on("dp.change", function(e) {
             $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
         });
+
+        */
 })

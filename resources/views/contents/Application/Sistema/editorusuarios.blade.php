@@ -50,27 +50,27 @@
                       <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
                       </p>
                       <span class="section">Personal Info</span>
-
+                      <input type="hidden" name="id_usuario" value="{{$id_usuario?$id_usuario:''}}" >
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nombres <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Ej: Diego Antonio" required="required" type="text" value="{{isset($usuario)?$usuario->NombreUsuario:''}}">
+                        <input id="name" class="form-control col-md-7 col-xs-12"  name="name" placeholder="Ej: Diego Antonio" required="required" type="text" value="{{$usuario?$usuario->NombreUsuario:''}}">
                         </div>
                       </div>
 
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Apellidos<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lastname">Apellidos<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="lastname" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="lastname" placeholder="Ej: Reyes Coronado" required="required" type="text">
+                          <input id="lastname" class="form-control col-md-7 col-xs-12"  name="lastname" placeholder="Ej: Reyes Coronado" required="required" type="text" value="{{$usuario?$usuario->ApellidoUsuario:''}}">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12" value="{{$usuario?$usuario->CorreoUsuario:''}}">
                         </div>
                       </div>
                       {{-- <div class="item form-group">
@@ -84,7 +84,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">DNI <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="number" id="dni" name="dni" required="required" data-validate-length="9" class="form-control col-md-7 col-xs-12">
+                          <input type="number" id="dni" name="dni" required="required" data-validate-length="9" class="form-control col-md-7 col-xs-12" value="{{$usuario?$usuario->DNIUsuario:''}}">
                         </div>
                       </div>
                       {{-- <div class="item form-group">
@@ -98,9 +98,13 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="occupation">Rol <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="Rol" type="text" name="rol" data-validate-length-range="5,20" class="optional form-control col-md-7 col-xs-12">
+                          {{-- <input id="Rol" name="rol" class="optional form-control col-md-7 col-xs-12" > --}}
+                          <select class="form-control" value="{{$usuario?$usuario->IDRol:''}}">
+                          <option value="{{$rol->IDRol}}"></option>
+                          </select>
                         </div>
                       </div>
+
                       <div class="item form-group">
                         <label for="password" class="control-label col-md-3">Contraseña <span class="required">*</span>
                         </label>
@@ -137,8 +141,8 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">Cancel</button>
-                          <button id="send" type="submit" class="btn btn-success">Submit</button>
+                          <button class="btn btn-primary" onclick="window.location.replace('/ListaUsuarios')">Cancel</button>
+                           <input id="send" type="submit" class="btn btn-success" value="Enviar"/>
                         </div>
                       </div>
                       
