@@ -32,7 +32,7 @@ class FacturadosController extends Controller
 
         return json_encode($clientes_busqueda);
     }
-
+    
     public function buscar_facturados(Request $request){
         
         $data = $request->all();
@@ -50,12 +50,23 @@ class FacturadosController extends Controller
         if(isset($data['end_date']))
         {
             $fecha_fin = date('Y-m-d',date_create_from_format('d/m/y',trim($data['end_date']))->getTimestamp());
-            $facturados = $facturados->Where('FechaEmitido','<=',$fecha_fin);
+            $facturados = $facturados->Where(DB::raw('date(FechaEmitido)'),'<=',$fecha_fin);
         }
             
         
         return json_encode($facturados->get());
 
+    }
+
+
+    public function BuscarServiciosXComprobante(Request $request)
+    {   
+        $data = $request->all();
+        $servicios_comprobante = DB::table('v_sis_servicios')
+                                ->where('IdComprobante',$data['id_comprobante'])->get();
+
+        return json_encode($servicios_comprobante);
+                        
     }
 
 }

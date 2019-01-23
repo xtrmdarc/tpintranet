@@ -15,6 +15,8 @@
         //Control Facturacion
         Route::get('CFacturacion','Application\Administracion\ControlFacturacionController@index');
         Route::post('ProcesarComprobante','Application\Administracion\ControlFacturacionController@procesarComprobante');
+        Route::post('ExportarComprobanteExcel','Application\Administracion\ControlFacturacionController@ExportarComprobanteExcel');
+        Route::post('BuscarServiciosContado','Application\Administracion\ControlFacturacionController@BuscarServiciosContado');
         
         //Tarifario
         Route::get('TarifarioMatriz','Application\Administracion\TarifarioMatrixController@index');
@@ -24,6 +26,7 @@
         //Facturados
         Route::get('Facturados','Application\Administracion\FacturadosController@index');
         Route::post('BuscarFacturados','Application\Administracion\FacturadosController@buscar_facturados');
+        Route::post('BuscarServiciosXComprobante','Application\Administracion\FacturadosController@BuscarServiciosXComprobante');
         
         //MacroPago
         Route::get('MacroPago','Application\Administracion\MacroPagoController@index');
@@ -35,7 +38,10 @@
             Route::get('/NuevoCliente','Application\Administracion\ClientesController@index_crear');
             Route::get('Editar/{id}','Application\Administracion\ClientesController@index_editar');
             Route::post('/GuardarCliente','Application\Administracion\ClientesController@GuardarCliente');
+            Route::post('/BuscarClienteXId','Application\Administracion\ClientesController@BuscarClienteXId');
         });
+
+
     });
     
     Route::post('BuscarClientesAC','Application\Administracion\FacturadosController@ac_buscar_clientes');

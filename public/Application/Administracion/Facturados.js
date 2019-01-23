@@ -1,5 +1,6 @@
+var facturados =[];
 $(function(){
-
+    
     $("#ac_cliente").autocomplete({
         delay: 1,
         autoFocus: true,
@@ -70,15 +71,17 @@ $(function(){
                 $('#facturados_carga_loader').css('display','none');
                 
                 var facturados_html = ``;
+                
                 data.forEach(facturado => {
-                    facturados_html += `<tr>
-                                            <td>${facturado.NombreCliente}</td>
-                                            <td>${facturado.DescTipoComprobante}</td>
+                    facturados_html += `<tr class="tr_comprobante_row" onclick="comprobante_detalle(${facturado.IdComprobante})" >
+                                            <td>${facturado.FechaEmitido}</td>
                                             <td>${facturado.Identificador}</td>
+                                            <td>${facturado.DescTipoComprobante}</td>
                                             <td class="text-right">${facturado.MontSubTotal}</td>
                                             <td class="text-right">${facturado.MontIgv}</td>
                                             <td class="text-right">${facturado.MontTotal}</td>
                                         </tr>`;
+                    facturados.push(facturado);
                 });
                 $('#tabla_facturados tbody').empty();
                 $('#tabla_facturados tbody').append(facturados_html);
@@ -88,4 +91,54 @@ $(function(){
 
 
 });
+function comprobante_detalle(id_comprobante)
+{   
+    $('#table-mdl-comprobante tbody').empty();
+    $('#facturados_detalle_carga_loader').css('display','block');
+    $('#cp_cred_mdl_subtotal').text('S/. 0.00') ;
+    $('#cp_cred_mdl_igv').text('S/. 0.00' );
+    $('#cp_cred_mdl_total').text('S/. 0.00' );
+    var facturado_actual  = facturados.find(f => f.IdComprobante == id_comprobante);
+    $('#id_cliente').val(id_cliente);
+    $('#id_comprobante').val(id_comprobante);
+    $('#mdl-servicios-factura').modal('show');
+    $('#mdl-servicios-factura-title').text(facturado_actual.Identificador+' -  '+ facturado_actual.FechaEmitido);
 
+    $.ajax({
+        url: '/Administracion/BuscarServiciosXComprobante',
+        headers:{
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "post",
+        dataType: "json",
+        data: {
+            id_comprobante: id_comprobante
+        },
+        success: function (data) {
+            console.log(data);
+            
+            
+            var facturados_detalle_html = ``;
+            
+            data.forEach(facturado => {
+                facturados_detalle_html += `<tr>
+                                        <th>${facturado.NumVale}</th>
+                                        <th>${facturado.FechaServicio}</th>
+                                        <th style="width:30%">${facturado.NombreUsuario}</th>
+                                        <th></th>
+                                        <th class="text-right" >${(parseFloat(facturado.MontContado)+parseFloat(facturado.MontTotalCredito)).toFixed(2)}</th>
+                                    </tr>`;
+
+            });
+            
+            $('#table-mdl-comprobante tbody').empty();
+            $('#table-mdl-comprobante tbody').append(facturados_detalle_html);
+            $('#cp_cred_mdl_subtotal').text('S/. ' +facturado_actual.MontSubTotal);
+            $('#cp_cred_mdl_igv').text('S/. ' +facturado_actual.MontIgv);
+            $('#cp_cred_mdl_total').text('S/. ' +facturado_actual.MontTotal);
+            $('#facturados_detalle_carga_loader').css('display','none');
+            $('#table-mdl-comprobante').css('display','block');
+        }
+    });
+
+}

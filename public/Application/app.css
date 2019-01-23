@@ -72,3 +72,11 @@
     background-color: green;
     color: white;
 }
+
+.tr_comprobante_row:hover{
+    cursor: pointer;
+}
+#table-mdl-comprobante{
+    table-layout: fixed;
+    width: 100%;
+}
