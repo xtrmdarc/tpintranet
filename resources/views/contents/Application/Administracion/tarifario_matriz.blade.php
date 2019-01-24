@@ -9,7 +9,7 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3 class="title text-primary">Flota</h3>
+          <h3 class="title text-primary">Bienvenido de vuelta, Sr. Reyes.</h3>
         </div>
 
       </div>

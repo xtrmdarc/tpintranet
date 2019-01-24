@@ -10,6 +10,6 @@ class ControlProduccionController extends Controller
     //
     public function index()
     {
-        return "Holi";
+        return view('contents.Application.Produccion.indicadores');
     }
 }
