@@ -80,3 +80,28 @@
     table-layout: fixed;
     width: 100%;
 }
+
+.table-indicadores th{
+    text-align: center;
+}
+.table-indicadores td{
+    text-align: right;
+}
+
+.td-objetivo-rango-superior{
+    background: #2dc937;
+    color: white;
+    text-align: right;
+}
+
+.td-objetivo-rango-normal{
+    background: #e7b416;
+    color: white;
+    text-align: right;
+}
+
+.td-objetivo-rango-inferior{
+    background: #cc3232;
+    color: white;
+    text-align: right;
+}

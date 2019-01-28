@@ -134,7 +134,7 @@
                                 <td id="cp_cred_mdl_subtotal" class="text-right" >S/. 0.00</td>
                                 
                             </tr>
-                            <tr>
+                            <tr>    
                                 <td></td>  
                                 <td></td>
                                 <td></td>

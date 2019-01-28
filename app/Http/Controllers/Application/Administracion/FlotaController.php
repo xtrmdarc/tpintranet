@@ -24,9 +24,11 @@ class FlotaController extends Controller
         
         $conductor = DB::table('Conductor')->where('IdConductorSistema',$id)->first();
         $tipo_conductor = DB::table('TipoConductor')->get();
+        $turnos_conductor = DB::table('Turno')->where('IdTipoTurnoSistema',2)->get();
         $data= [
             'conductor' => $conductor,
-            'tipo_conductor'=> $tipo_conductor
+            'tipo_conductor'=> $tipo_conductor,
+            'turnos_conductor' => $turnos_conductor
         ];
         return view('contents.Application.Administracion.Flota.crea_edita_index')->with($data);
     }
@@ -45,7 +47,8 @@ class FlotaController extends Controller
             'ApellidoM' => $data['apellido_materno'],
             'Tienda' => $data['tienda'],
             'NumCuenta'=> $data['numero_cuenta'],
-            'IdTipoConductor'=>$data['slc_tipo_conductor']
+            'IdTipoConductor'=>$data['slc_tipo_conductor'],
+            'IdTurnoSistema' => $data['slc_turno_conductor']
         ]);
         
         return redirect('/Administracion/Flota');

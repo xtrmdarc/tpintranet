@@ -91,6 +91,19 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Turno</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <select name="slc_turno_conductor" id="" class="form-control">
+                                @if(!$conductor->IdTurnoSistema)
+                                    <option value=""></option>
+                                @endif
+                                @foreach ($turnos_conductor as $tc)
+                                    <option  value="{{$tc->IdTurnoSistema}}" {{$tc->IdTurnoSistema==$conductor->IdTurnoSistema?'selected':''}}>{{$tc->DescTurno}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     
                     <div class="ln_solid"></div>
                     <div class="form-group">
