@@ -99,8 +99,10 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           {{-- <input id="Rol" name="rol" class="optional form-control col-md-7 col-xs-12" > --}}
-                          <select class="form-control" value="{{$usuario?$usuario->IDRol:''}}">
-                          <option value="{{$rol->IDRol}}"></option>
+                          <select class="form-control" name="rol" >
+                            @foreach ($roles as $rol)
+                              <option value="{{$rol->IDRol}}"> {{$rol->NombreRol}}</option>
+                            @endforeach
                           </select>
                         </div>
                       </div>
@@ -120,6 +122,29 @@
                         </div>
                       </div> --}}
 
+                      {{-- <div class="item form-group">
+                          <label for="fechaingreso" class="control-label col-md-3">Fecha De Ingreso <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+
+                          <fieldset>
+                              <div class="control-group">
+                                <div class="controls">
+                                  
+                                    <input type="text" class="form-control has-feedback-left" id="fechaingreso" name="fechaingreso" aria-describedby="inputSuccess2Status2">
+                                    <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                    <span id="inputSuccess2Status2" class="sr-only">(success)</span>
+                                  
+                                </div>
+                              </div>
+                            </fieldset>
+
+                          </div>
+
+                      </div> --}}
+                      
+                      
+
                       <div class="item form-group">
                         <label for="FechaIngreso" class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Ingreso <span class="required">*</span>
                         </label>
@@ -129,7 +154,7 @@
                              <div class="control-group">
                                <div class="controls">
                                  <div class="col-md-11 xdisplay_inputx form-group has-feedback">
-                                   <input type="text" class="form-control has-feedback-left" id="single_cal4" placeholder="First Name" aria-describedby="inputSuccess2Status4">
+                                   <input type="text" class="form-control has-feedback-left"  name="fechaingreso" id="single_cal4" aria-describedby="inputSuccess2Status4">
                                    <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                                    <span id="inputSuccess2Status4" class="sr-only">(success)</span>
                                  </div>
@@ -137,6 +162,8 @@
                              </div>
                            </fieldset>
                           </div>
+
+
                       </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">

@@ -13,8 +13,6 @@
 
 include 'Application/sistema_routes.php';
 include 'Application/administracion_routes.php';
-include 'Application/gerencia_routes.php';
-include 'Application/produccion_routes.php';
     
 Route::get('/Administracion', 'Application\Administracion\ControlFacturacionController@index' );
 
@@ -22,6 +20,7 @@ Route::get('/Produccion','Application\Produccion\ControlProduccionController@ind
 
 Route::get('/InicioSesion','Application\Sistema\InicioSesionController@index');
 
+//Usuario
 Route::get('/EditorUsuario','Application\Sistema\AjusteUsuariosController@editar_usuario');
 
 Route::post('/RegistroUsuarioRequest','Application\Sistema\AjusteUsuariosController@RegistroUsuarioRequest');
@@ -37,22 +36,21 @@ Route::prefix('Usuarios')->group(function()
 }
 );
 
-Route::get('/EditorCliente','Application\Sistema\AjusteClientesController@editar_cliente');
+//Turno
+Route::get('/EditorTurno','Application\Sistema\AjusteTurnoController@editar_turnos');
 
-Route::get('/ListaClientes','Application\Sistema\AjusteClientesController@listar_cliente');
+Route::post('/RegistroTurnoRequest','Application\Sistema\AjusteTurnoController@RegistroTurnoRequest');
 
-Route::post('/RegistroClienteRequest','Application\Sistema\AjusteClientesController@RegistroClienteRequest');
+Route::get('/ListaTurnos','Application\Sistema\AjusteTurnoController@listar_turnos');
 
-Route::prefix('Clientes')->group(function()
+Route::prefix('Turno')->group(function()
 {
     
-    Route::get('EditarCliente/{clientesis_id}','Application\Sistema\AjusteClientesController@editar_cliente');
-    Route::get('EliminarCliente/{clientesis_id}','Application\Sistema\AjusteClientesController@eliminar_cliente');
+    Route::get('EditarTurno/{idturno}','Application\Sistema\AjusteUsuariosController@editar_turnos');
+    Route::get('EliminarTurno/{idturno}','Application\Sistema\AjusteUsuariosController@eliminar_turnos');
 
 }
-
-
-
 );
+
 
 
