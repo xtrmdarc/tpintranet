@@ -6,7 +6,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
-               <h2>Usuarios Sistema{{-- <small>Usuarios Sistema</small>--}}</h2>
+               <h2>Turnos{{-- <small>Usuarios Sistema</small>--}}</h2>
               {{-- <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -20,7 +20,7 @@
                 <li><a class="close-link"><i class="fa fa-close"></i></a>
                 </li>
               </ul> --}}
-              <button class="btn btn-primary" onclick="window.location.replace('/EditorUsuario')" role="button" style="float:right">Registrar Usuario</button>
+              <button class="btn btn-primary" onclick="window.location.replace('/EditorTurno')" role="button" style="float:right">Agregar Turno</button>
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -34,26 +34,26 @@
                     <table id="datatable-keytable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>DNI</th>
-                          <th>Nombre Completo</th>
-                          <th>IDRol</th>
-                          <th>FechaDeIngreso</th>
+                          <th>Hora de Inicio</th>
+                          <th>Hora de Fin</th>
+                          <th>Descripción</th>
+                          <th>Tipo de turno</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>
 
 
                       <tbody>
-                        @foreach ($usuarios as $usuario)
+                        @foreach ($turnos as $turno)
                         
                           <tr>
-                          <td>{{$usuario->DNIUsuario}}</td>
-                          <td>{{$usuario->NombreUsuario.$usuario->ApellidoUsuario}}</td>
-                          <td>{{$usuario->IDRol}}</td>
-                          <td>{{$usuario->FechaDeIngresoUsuario}}</td>
+                          <td>{{$turno->HoraInicio}}</td>
+                          <td>{{$turno->HoraFin}}</td>
+                          <td>{{$turno->DescTurno}}</td>
+                          <td>{{$turno->IdTipoTurnoSistema}}</td>
                           <td>
-                            <button class="btn btn-primary" onclick="window.location.replace('Usuarios/EditarUsuario/{{$usuario->IDUsuarioSis}}')" >Editar </button>
-                            <button class="btn btn-secondary" onclick="window.location.replace('Usuarios/EliminarUsuario/{{$usuario->IDUsuarioSis}}')" >Eliminar </button>
+                            <button class="btn btn-primary" onclick="window.location.replace('Turnos/EditarTurno/{{$turno->IdTipoTurnoSistema}}')" >Editar </button>
+                            <button class="btn btn-secondary" onclick="window.location.replace('Turnos/EliminarTurno/{{$turno->IdTipoTurnoSistema}}')" >Eliminar </button>
                           </td>
                           </tr>
                        @endforeach
@@ -61,7 +61,7 @@
                       </tbody>
                     </table>
                     <div class="row" style="float:right">
-                        {{ $usuarios->links() }}
+                        {{ $turnos->links() }}
                     </div>
                   </div>
                 </div>

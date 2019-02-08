@@ -23,15 +23,16 @@ class AjusteUsuariosController extends Controller
         return view('contents.application.sistema.listausuarios')->with($data);
     }
 
-    public function editar_usuario($usuario_id=null, $rol_id=null)
+    public function editar_usuario($usuario_id=null)
     {
         $usuario = DB::table('UsuarioSis')->where('IDUsuarioSis',$usuario_id)->first();
 
-        $rol = DB::table('Rol')->where('IDRol', $rol_id)->first();
+        $roles = DB::table('Rol')->get();
 
         $data =[
             'usuario' => $usuario,
-            'id_usuario' => $usuario?$usuario->IDUsuarioSis:''
+            'id_usuario' => $usuario?$usuario->IDUsuarioSis:'',
+            'roles' => $roles
         ];
         
         return view('contents.application.sistema.editorusuarios')->with($data);
@@ -59,6 +60,9 @@ class AjusteUsuariosController extends Controller
         $IDRol=$data['rol'];
         $PasswordUsuario=$data['password'];
 
+        $fechaingreso=$data['fechaingreso'];
+        $FechaDeIngreso=date('Y-m-d',date_create_from_format('d/m/Y',trim($fechaingreso))->getTimestamp());
+
         if($data['id_usuario']!="")
         {
             DB::table('UsuarioSis')->where('IDUsuarioSis',$data["id_usuario"])->update
@@ -69,7 +73,8 @@ class AjusteUsuariosController extends Controller
                     'CorreoUsuario'=>$CorreoUsuario,
                     'DNIUsuario'=>$DNIUsuario,
                     'IDRol'=>$IDRol,
-                    'PasswordUsuario'=>$PasswordUsuario
+                    'PasswordUsuario'=>$PasswordUsuario,
+                    'FechaDeIngresoUsuario'=>$FechaDeIngreso
                 ]);
         }
         else
@@ -82,7 +87,8 @@ class AjusteUsuariosController extends Controller
                     'CorreoUsuario'=>$CorreoUsuario,
                     'DNIUsuario'=>$DNIUsuario,
                     'IDRol'=>$IDRol,
-                    'PasswordUsuario'=>$PasswordUsuario
+                    'PasswordUsuario'=>$PasswordUsuario,
+                    'FechaDeIngresoUsuario'=>$FechaDeIngreso
                 ]
             );
         }
