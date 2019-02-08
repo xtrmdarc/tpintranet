@@ -28,7 +28,7 @@ Route::post('/RegistroUsuarioRequest','Application\Sistema\AjusteUsuariosControl
 Route::get('/ListaUsuarios','Application\Sistema\AjusteUsuariosController@listar_usuario');
 
 Route::prefix('Usuarios')->group(function()
-{
+{   
     
     Route::get('EditarUsuario/{usuario_id}','Application\Sistema\AjusteUsuariosController@editar_usuario');
     Route::get('EliminarUsuario/{usuario_id}','Application\Sistema\AjusteUsuariosController@eliminar_usuario');
@@ -43,11 +43,11 @@ Route::post('/RegistroTurnoRequest','Application\Sistema\AjusteTurnoController@R
 
 Route::get('/ListaTurnos','Application\Sistema\AjusteTurnoController@listar_turnos');
 
-Route::prefix('Turno')->group(function()
+Route::prefix('Turnos')->group(function()
 {
     
-    Route::get('EditarTurno/{idturno}','Application\Sistema\AjusteUsuariosController@editar_turnos');
-    Route::get('EliminarTurno/{idturno}','Application\Sistema\AjusteUsuariosController@eliminar_turnos');
+    Route::get('EditarTurno/{idturno}','Application\Sistema\AjusteTurnoController@editar_turnos');
+    Route::get('EliminarTurno/{idturno}','Application\Sistema\AjusteTurnoController@eliminar_turnos');
 
 }
 );

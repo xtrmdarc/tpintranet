@@ -50,7 +50,7 @@
                      
                       </p>
                       <span class="section">Editor de Turnos</span>
-                      <input type="hidden" name="id_usuario" value="{{$idturno?$idturno:''}}" >
+                      <input type="hidden" name="idturno" value="{{$idturno?$idturno:''}}" >
                       
 
                       <div class="item form-group">
@@ -75,7 +75,7 @@
                           <div class="col-sm-4">
                             <div class="form-group">
                                 <div class="input-group date" id="horafin">
-                                    <input name="horainicio" type="text" class="form-control" value="{{$turno?$turno->HoraFin:''}}">
+                                    <input name="horafin" type="text" class="form-control" value="{{$turno?$turno->HoraFin:''}}">
                                     <span class="input-group-addon">
                                       <span class="glyphicon glyphicon-calendar"></span>
                                     </span>

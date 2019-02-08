@@ -50,10 +50,10 @@
                           <td>{{$turno->HoraInicio}}</td>
                           <td>{{$turno->HoraFin}}</td>
                           <td>{{$turno->DescTurno}}</td>
-                          <td>{{$turno->IdTipoTurnoSistema}}</td>
+                          <td>{{$turno->DesTipoTurno}}</td>
                           <td>
-                            <button class="btn btn-primary" onclick="window.location.replace('Turnos/EditarTurno/{{$turno->IdTipoTurnoSistema}}')" >Editar </button>
-                            <button class="btn btn-secondary" onclick="window.location.replace('Turnos/EliminarTurno/{{$turno->IdTipoTurnoSistema}}')" >Eliminar </button>
+                            <button class="btn btn-primary" onclick="window.location.replace('Turnos/EditarTurno/{{$turno->IdTurnoSistema}}')" >Editar </button>
+                            {{-- <button class="btn btn-secondary" onclick="window.location.replace('Turnos/EliminarTurno/{{$turno->IdTurnoSistema}}')" >Eliminar </button> --}}
                           </td>
                           </tr>
                        @endforeach

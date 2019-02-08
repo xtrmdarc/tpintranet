@@ -16,7 +16,7 @@ class AjusteTurnoController extends Controller
 
     public function listar_turnos()
     {
-        $turnos=DB::table('Turno')->paginate(10);
+        $turnos=DB::table('v_sis_turnos')->paginate(10);
         $data=['turnos'=>$turnos];
         return view('contents.application.sistema.listaturnos')->with($data);
     }
@@ -26,7 +26,7 @@ class AjusteTurnoController extends Controller
         $turno = DB::table('Turno')->where('IdTurnoSistema',$id_turno)->first();
        
         $tipoturno = DB::table('TipoTurno')->get();
-
+        
         $data=
         [
             'turno' => $turno,
@@ -55,8 +55,8 @@ class AjusteTurnoController extends Controller
         $horainicio=$data['horainicio'];
         $horafin=$data['horafin'];
 
-        $HoraInicio=time('HH:mm',date_create_from_format('HH:mm',trim($horainicio))->getTimestamp());
-        $HoraFin=time('HH:mm',date_create_from_format('HH:mm',trim($horafin))->getTimestamp());
+        $HoraInicio=date('H:i:s',strtotime(trim($horainicio)));
+        $HoraFin=date('H:i:s',strtotime(trim($horafin)));
 
         if($data['idturno']!="")
         {

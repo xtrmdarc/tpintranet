@@ -53,7 +53,7 @@
                           <td>{{$usuario->FechaDeIngresoUsuario}}</td>
                           <td>
                             <button class="btn btn-primary" onclick="window.location.replace('Usuarios/EditarUsuario/{{$usuario->IDUsuarioSis}}')" >Editar </button>
-                            <button class="btn btn-secondary" onclick="window.location.replace('Usuarios/EliminarUsuario/{{$usuario->IDUsuarioSis}}')" >Eliminar </button>
+                            {{-- <button class="btn btn-secondary" onclick="window.location.replace('Usuarios/EliminarUsuario/{{$usuario->IDUsuarioSis}}')" >Eliminar </button> --}}
                           </td>
                           </tr>
                        @endforeach
