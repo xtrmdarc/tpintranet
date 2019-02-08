@@ -89,8 +89,7 @@
                   </li>
                   <li><a><i class="fa fa-desktop"></i> Gerencia<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">Estadistica Clientes</a></li>
-                      <li><a href="media_gallery.html">Ingresos y Costos</a></li>
+                      <li><a href="/Gerencia/EstCli">Estadistica Clientes</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> Sistema <span class="fa fa-chevron-down"></span></a>
