@@ -51,10 +51,8 @@ class TarifarioMatrixController extends Controller
                     $tarifa->duracion = round($ruta->duracion,0);
                     //$tarifa->costo = round($tarifa->kilometro/1000< 20? $tarifa->kilometro/1000*1.5 + 10:$tarifa->kilometro/1000*2 ,2);
                     $tarifa->costo = round($tarifa->kilometro/1000< 20? $tarifa->kilometro/1000*1.5 + 10:$tarifa->kilometro/1000*2 ,0);
-                    //dd($data);
-                   
+                    //dd($data);   
                 }
-                
                 
                 $tarifario[] = $tarifa;
                
