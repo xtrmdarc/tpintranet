@@ -19,6 +19,6 @@ class EstadisticaClientesController extends Controller
         ];
         //dd(count(array_count_values(array_column($estadistica_clientes_db,'semana'))));
     
-        return view('contents.Application.gerencia.estadistica_clientes')->with($data);
+        return view('contents.Application.Gerencia.estadistica_clientes')->with($data);
     }
 }
