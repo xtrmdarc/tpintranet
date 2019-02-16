@@ -72,8 +72,8 @@ class CargaServiciosController extends Controller
 
                     //Verificar si el servicio existe en nuestra bd
                     $id_servicio = $emapData[0];
-                    if($id_servicio == '538433')
-                    dd($id_servicio,(int)$id_servicio,!DB::table('Servicio')->where('IdServicio',$id_servicio)->exists(),!DB::table('Servicio')->where('IdServicio',(int)$id_servicio)->exists());
+                    //if($id_servicio == '538433')
+                    //dd($id_servicio,(int)$id_servicio,!DB::table('Servicio')->where('IdServicio',$id_servicio)->exists(),!DB::table('Servicio')->where('IdServicio',(int)$id_servicio)->exists());
                     if(!DB::table('Servicio')->where('IdServicio',$id_servicio)->exists()){
                         
                         date_default_timezone_set('America/Lima');
