@@ -62,7 +62,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Empresa</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <select name="slc_tipo_conductor" id="" class="form-control">
+                            <select name="slc_empresa" id="" class="form-control">
                                 <option value="" > Seleccionar </option>
                                 @foreach ($empresas as $e)
                                     <option  value="{{$e->IdEmpresa}}" {{$e->IdEmpresa==$cliente->IdEmpresa?'selected':''}}>{{$e->NombreEmpresa}}</option>
@@ -70,7 +70,17 @@
                             </select>
                         </div>
                     </div>
-                    
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Facturación</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <select name="slc_es_credito" id="" class="form-control">
+                                <option value="" > Seleccionar </option>
+                                <option value="1" {{$cliente->EsCredito==1?'selected':''}} > Crédito </option>
+                                <option value="0" {{$cliente->EsCredito==0?'selected':''}} > Contado </option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                     <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
