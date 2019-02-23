@@ -3,6 +3,7 @@ $(function(){
     
     
     Dropzone.options.dzCargarServicios = {
+        timeout:0,
         init: function() {
 
             this.on("sending",function(file){
