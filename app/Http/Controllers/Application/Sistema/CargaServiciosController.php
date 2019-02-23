@@ -53,9 +53,12 @@ class CargaServiciosController extends Controller
     
     public function cargarServiciosPrincipal(Request $request){
         $response = new \stdClass();
+        echo(date("Y-m-d H:i:s"));
         try{
             //dd($request->file);
+            echo(date("Y-m-d H:i:s"));
             $servicios_file = fopen($request->file,'r');
+            echo(date("Y-m-d H:i:s"));
             //dd($servicios_xls);
             $cont_fila = 0;
             $id_carga = 0;
@@ -63,10 +66,10 @@ class CargaServiciosController extends Controller
             
 
 
-            while (($emapData = fgetcsv($servicios_file, 10000, ",")) !== FALSE){
+            while (($emapData = fgetcsv($servicios_file, 2000, ",")) !== FALSE){
                 
                 $cont_fila++;
-
+               
                 if($cont_fila > 1)
                 {   
 
@@ -74,7 +77,7 @@ class CargaServiciosController extends Controller
                     $id_servicio = $emapData[0];
                     //if($id_servicio == '538433')
                     //dd($id_servicio,(int)$id_servicio,!DB::table('Servicio')->where('IdServicio',$id_servicio)->exists(),!DB::table('Servicio')->where('IdServicio',(int)$id_servicio)->exists());
-                    if(!DB::table('Servicio')->where('IdServicio',$id_servicio)->exists()){
+                    if(!DB::table('Servicio_p')->where('IdServicio',$id_servicio)->exists()){
                         
                         date_default_timezone_set('America/Lima');
                         setlocale(LC_ALL,"es_ES@euro","es_ES","esp");
@@ -304,8 +307,9 @@ class CargaServiciosController extends Controller
                         ];
                         //dd($servicios_val_arr);
                         
-                        DB::table('Servicio')->insert($servicios_val_arr);           
+                        DB::table('Servicio_p')->insert($servicios_val_arr);           
                         $cont++;
+                        echo($cont_fila .date("Y-m-d H:i:s"));
                         //dd('inserta?');
                     }
                 }
@@ -315,7 +319,7 @@ class CargaServiciosController extends Controller
             $response->status = 1;
             $response->numFilas = $cont;
             $response->carga_id = $id_carga;
-            return json_encode($response);
+            
 
         }
         catch(Exception $ex){
