@@ -67,7 +67,7 @@ class CargaServiciosController extends Controller
                 
                 $cont_fila++;
                 echo("\n ----- ".$cont_fila. " nueva fila ----- ". round(microtime(true) * 1000));
-                if($cont_fila < 2)
+                if($cont_fila > 1 && $cont_fila < 10)
                 {   
                     
                     //Verificar si el servicio existe en nuestra bd
