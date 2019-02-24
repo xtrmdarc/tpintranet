@@ -584,7 +584,7 @@ class CargaServiciosController extends Controller
                         
                         $servicios_val_arr = [
                             'IdServicio' => $id_servicio,
-                            'FechaServicio' => $fechaServicio,
+                            'FechaServicio' => '',
                             'HoraProgramada' => $horaProgramada,
                             'MontContado' => $montContado,
                             'MontTotalCredito' => $montTotalCred,
@@ -595,7 +595,7 @@ class CargaServiciosController extends Controller
                             'MontPeaje'=> $MontPeaje,
                             'MontEspera' => $MontEspera,
                             'TiempoEspera' => $TiempoEspera,
-                            'FechaRegistroServicio' => $FechaRegistroServicio,
+                            'FechaRegistroServicio' => '',
                             'HoraLlegadaVehiculo'=> $HoraLlegadaVehiculo,
                             'HoraInicioServicio'=> $HoraInicioServicio,
                             'HoraFinServicio' => $HoraFinServicio,
