@@ -76,7 +76,7 @@ class CargaServiciosController extends Controller
                     //if($id_servicio == '538433')
                     //dd($id_servicio,(int)$id_servicio,!DB::table('Servicio')->where('IdServicio',$id_servicio)->exists(),!DB::table('Servicio')->where('IdServicio',(int)$id_servicio)->exists());
                     echo("\n ".$cont_fila. " Query existe el servicio inicio ". round(microtime(true) * 1000));
-                    if(!DB::table('Servicio')->where('IdServicio',$id_servicio)->exists()){
+                    if(!DB::table('Servicio_p')->where('IdServicio',$id_servicio)->exists()){
                         
                         echo("\n ".$cont_fila. " Query existe el servicio fin ". round(microtime(true) * 1000));
 
