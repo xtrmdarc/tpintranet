@@ -66,7 +66,7 @@ class CargaServiciosController extends Controller
             while (($emapData = fgetcsv($servicios_file, 10000, ",")) !== FALSE){
                 
                 $cont_fila++;
-                echo("\n ----- ".$cont_fila. " nueva fila ----- ". date("Y-m-d H:i:s"));
+                echo("\n ----- ".$cont_fila. " nueva fila ----- ". round(microtime(true) * 1000));
                 if($cont_fila < 2)
                 {   
                     
@@ -75,15 +75,15 @@ class CargaServiciosController extends Controller
                     $id_servicio = $emapData[0];
                     //if($id_servicio == '538433')
                     //dd($id_servicio,(int)$id_servicio,!DB::table('Servicio')->where('IdServicio',$id_servicio)->exists(),!DB::table('Servicio')->where('IdServicio',(int)$id_servicio)->exists());
-                    echo("\n ".$cont_fila. " Query existe el servicio inicio ". date("Y-m-d H:i:s"));
+                    echo("\n ".$cont_fila. " Query existe el servicio inicio ". round(microtime(true) * 1000));
                     if(!DB::table('Servicio')->where('IdServicio',$id_servicio)->exists()){
                         
-                        echo("\n ".$cont_fila. " Query existe el servicio fin ". date("Y-m-d H:i:s"));
+                        echo("\n ".$cont_fila. " Query existe el servicio fin ". round(microtime(true) * 1000));
 
                         date_default_timezone_set('America/Lima');
                         setlocale(LC_ALL,"es_ES@euro","es_ES","esp");
                         
-                        $fecha_carga = date("Y-m-d H:i:s");
+                        $fecha_carga = round(microtime(true) * 1000);
                         
                         $esContado = false;
                         
@@ -137,13 +137,13 @@ class CargaServiciosController extends Controller
                         $nombre_cliente_xls = trim($emapData[5]);
                         
                         $cliente = DB::table('Cliente')->where('IdCliente',$id_cliente_xls);
-                        echo("\n ".$cont_fila. " Query existe el cliente inicio ". date("Y-m-d H:i:s"));
+                        echo("\n ".$cont_fila. " Query existe el cliente inicio ". round(microtime(true) * 1000));
                         if($cliente->exists())
                         {  
-                            echo("\n ".$cont_fila. " Query existe el cliente fin ". date("Y-m-d H:i:s"));
-                            echo("\n ".$cont_fila. " Query obtener el cliente inicio ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query existe el cliente fin ". round(microtime(true) * 1000));
+                            echo("\n ".$cont_fila. " Query obtener el cliente inicio ". round(microtime(true) * 1000));
                             $cliente_obj = $cliente->first();
-                            echo("\n ".$cont_fila. " Query obtener el cliente fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el cliente fin ". round(microtime(true) * 1000));
                             $id_cliente = $cliente_obj->IdClienteSistema;
                         }
                         else{
@@ -154,12 +154,12 @@ class CargaServiciosController extends Controller
                         $id_usuario_xls = $emapData[53];
                         $nombre_usuario_xls = trim($emapData[7]);
                         $usuario = DB::table('Usuario')->where('IdUsuario',$id_usuario_xls);
-                        echo("\n ".$cont_fila. " Query existe el usuario inicio ". date("Y-m-d H:i:s"));
+                        echo("\n ".$cont_fila. " Query existe el usuario inicio ". round(microtime(true) * 1000));
                         if($usuario->exists()){
-                            echo("\n ".$cont_fila. " Query existe el usuario fin ". date("Y-m-d H:i:s"));
-                            echo("\n ".$cont_fila. " Query obtener el usuario inicio ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query existe el usuario fin ". round(microtime(true) * 1000));
+                            echo("\n ".$cont_fila. " Query obtener el usuario inicio ". round(microtime(true) * 1000));
                             $usuario_obj = $usuario->first();
-                            echo("\n ".$cont_fila. " Query obtener el usuario fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el usuario fin ". round(microtime(true) * 1000));
                             $id_usuario  = $usuario_obj->IdUsuarioSistema;
                         }
                         else{
@@ -168,12 +168,12 @@ class CargaServiciosController extends Controller
                         //handle tipo servicio
                         $desc_tipo_servicio_xls = trim($emapData[19]);
                         $tipo_servicio = DB::table('TipoServicio')->where('DescTipoServicio',$desc_tipo_servicio_xls);
-                        echo("\n ".$cont_fila. " Query existe el tipo_servicio inicio ". date("Y-m-d H:i:s"));
+                        echo("\n ".$cont_fila. " Query existe el tipo_servicio inicio ". round(microtime(true) * 1000));
                         if($tipo_servicio->exists()){
-                            echo("\n ".$cont_fila. " Query existe el tipo_servicio fin ". date("Y-m-d H:i:s"));
-                            echo("\n ".$cont_fila. " Query obtener el tipo_servicio inicio ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query existe el tipo_servicio fin ". round(microtime(true) * 1000));
+                            echo("\n ".$cont_fila. " Query obtener el tipo_servicio inicio ". round(microtime(true) * 1000));
                             $tipo_servicio_obj = $tipo_servicio->first();
-                            echo("\n ".$cont_fila. " Query obtener el tipo_servicio fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el tipo_servicio fin ". round(microtime(true) * 1000));
                             
                             $id_tipo_servicio  = $tipo_servicio_obj->IdTipoServicioSistema;
                         }
@@ -183,14 +183,14 @@ class CargaServiciosController extends Controller
                         //handle tipo auto
                         $desc_tipo_auto_xls = trim($emapData[20]);
                         $tipo_auto = DB::table('TipoAuto')->where('DescTipoAuto',$desc_tipo_auto_xls);
-                        echo("\n ".$cont_fila. " Query existe el tipo_auto inicio ". date("Y-m-d H:i:s"));
+                        echo("\n ".$cont_fila. " Query existe el tipo_auto inicio ". round(microtime(true) * 1000));
                         
                         if($tipo_auto->exists()){
-                            echo("\n ".$cont_fila. " Query existe el tipo_auto fin ". date("Y-m-d H:i:s"));
-                            echo("\n ".$cont_fila. " Query obtener el tipo_auto inicio ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query existe el tipo_auto fin ". round(microtime(true) * 1000));
+                            echo("\n ".$cont_fila. " Query obtener el tipo_auto inicio ". round(microtime(true) * 1000));
                             
                             $tipo_auto_obj = $tipo_auto->first();
-                            echo("\n ".$cont_fila. " Query obtener el tipo_auto fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el tipo_auto fin ". round(microtime(true) * 1000));
                             
                             $id_tipo_auto  = $tipo_auto_obj->IdTipoAutoSistema;
                         }
@@ -205,14 +205,14 @@ class CargaServiciosController extends Controller
                         $cod_planilla_conductor_xls = trim($emapData[18]);
                         //vehiculo
                         $vehiculo = DB::table('Vehiculo') ->where('IdVehiculo',$id_vehiculo_xls);
-                        echo("\n ".$cont_fila. " Query existe el vehiculo inicio ". date("Y-m-d H:i:s"));
+                        echo("\n ".$cont_fila. " Query existe el vehiculo inicio ". round(microtime(true) * 1000));
                         
                         if($vehiculo->exists()){
-                            echo("\n ".$cont_fila. " Query existe el vehiculo fin ". date("Y-m-d H:i:s"));
-                            echo("\n ".$cont_fila. " Query obtener el vehicuo inicio ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query existe el vehiculo fin ". round(microtime(true) * 1000));
+                            echo("\n ".$cont_fila. " Query obtener el vehicuo inicio ". round(microtime(true) * 1000));
                             
                             $vehiculo_obj = $vehiculo->first();
-                            echo("\n ".$cont_fila. " Query obtener el vehicuo fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el vehicuo fin ". round(microtime(true) * 1000));
                             
                             $id_vehiculo = $vehiculo_obj->IdVehiculoSistema;
                         }
@@ -226,12 +226,12 @@ class CargaServiciosController extends Controller
                         
                         
                         $conductor = DB::table('Conductor')->where('IdConductor',$id_conductor_xls);
-                        echo("\n ".$cont_fila. " Query existe el Conductor inicio ". date("Y-m-d H:i:s"));
+                        echo("\n ".$cont_fila. " Query existe el Conductor inicio ". round(microtime(true) * 1000));
                         if($conductor->exists()){
-                            echo("\n ".$cont_fila. " Query existe el Conductor fin ". date("Y-m-d H:i:s"));
-                            echo("\n ".$cont_fila. " Query obtener el Conductor inicio ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query existe el Conductor fin ". round(microtime(true) * 1000));
+                            echo("\n ".$cont_fila. " Query obtener el Conductor inicio ". round(microtime(true) * 1000));
                             $conductor_obj = $conductor->first();
-                            echo("\n ".$cont_fila. " Query existe el Conductor fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query existe el Conductor fin ". round(microtime(true) * 1000));
                             $id_conductor = $conductor_obj->IdConductorSistema;
                         }
                         else{
@@ -262,12 +262,12 @@ class CargaServiciosController extends Controller
                         $moneda_xls = trim($emapData[13]);
 
                         $representacion = DB::table('Moneda')->where('SimbMoneda',$moneda_xls);
-                        echo("\n ".$cont_fila. " Query existe el moneda inicio ". date("Y-m-d H:i:s"));
+                        echo("\n ".$cont_fila. " Query existe el moneda inicio ". round(microtime(true) * 1000));
                         if($representacion->exists()){
-                            echo("\n ".$cont_fila. " Query existe el moneda fin ". date("Y-m-d H:i:s"));
-                            echo("\n ".$cont_fila. " Query obtener el moneda inicio ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query existe el moneda fin ". round(microtime(true) * 1000));
+                            echo("\n ".$cont_fila. " Query obtener el moneda inicio ". round(microtime(true) * 1000));
                             $representacion_obj = $representacion->first();
-                            echo("\n ".$cont_fila. " Query existe el moneda fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query existe el moneda fin ". round(microtime(true) * 1000));
                             $id_moneda = $representacion_obj->IdMonedaSistema;
                         }
                         else {
@@ -291,9 +291,9 @@ class CargaServiciosController extends Controller
 
                             $id_esCredito = 0;
                             //handle id empresa
-                            echo("\n ".$cont_fila. " Query obtener el Cliente inicio ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el Cliente inicio ". round(microtime(true) * 1000));
                             $cliente_obj_v = DB::table('Cliente')->where('IdClienteSistema',$id_cliente)->first();
-                            echo("\n ".$cont_fila. " Query obtener el Cliente fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el Cliente fin ". round(microtime(true) * 1000));
                             if($cliente_obj_v->IdEmpresa != null  || $cliente_obj_v->IdEmpresa != '' || isset($cliente_obj_v->IdEmpresa) || $cliente_obj_v->IdEmpresa != 0 ){
                                 $id_empresa = $cliente_obj_v->IdEmpresa;
                             }
@@ -345,9 +345,9 @@ class CargaServiciosController extends Controller
                             'EsCredito' => $esContado?false:true
                         ];
                         //dd($servicios_val_arr);
-                        echo("\n ".$cont_fila. " Query insertar el servicio inicio ". date("Y-m-d H:i:s"));
+                        echo("\n ".$cont_fila. " Query insertar el servicio inicio ". round(microtime(true) * 1000));
                         DB::table('Servicio')->insert($servicios_val_arr);        
-                        echo("\n ".$cont_fila. " Query existe el servicio fin ". date("Y-m-d H:i:s"));   
+                        echo("\n ".$cont_fila. " Query existe el servicio fin ". round(microtime(true) * 1000));   
                         
                         $cont++;
                         //dd('inserta?');
