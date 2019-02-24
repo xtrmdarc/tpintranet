@@ -109,7 +109,7 @@ class CargaServiciosController extends Controller
                         //dd(date('Y-m-d H:i:s',strtotime(trim(str_replace('/','-',' 30/07/18 17:47 ')))));
                         //dd($emapData[39],trim($emapData[39]),strtotime(trim($emapData[39])),date('Y-m-d H:i:s',strtotime(trim($emapData[39]))));
                         //echo date_create_from_format('d/m/y H:i',trim($emapData[39]));
-                        $FechaRegistroServicio= date('Y-m-d H:i:s',date_create_from_format('d/m/y H:i',trim($emapData[39]))->getTimestamp());
+                        //$FechaRegistroServicio= date('Y-m-d H:i:s',date_create_from_format('d/m/y H:i',trim($emapData[39]))->getTimestamp());
                         //date('Y-m-d H:i:s',strtotime(trim(str_replace('/','-',$emapData[39]))));
                         
                         //---
