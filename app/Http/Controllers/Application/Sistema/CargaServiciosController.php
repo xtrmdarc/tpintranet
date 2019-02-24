@@ -346,7 +346,7 @@ class CargaServiciosController extends Controller
                         ];
                         //dd($servicios_val_arr);
                         echo("\n ".$cont_fila. " Query insertar el servicio inicio ". round(microtime(true) * 1000));
-                        DB::table('Servicio')->insert($servicios_val_arr);        
+                        DB::table('Servicio_p')->insert($servicios_val_arr);        
                         echo("\n ".$cont_fila. " Query existe el servicio fin ". round(microtime(true) * 1000));   
                         
                         $cont++;
