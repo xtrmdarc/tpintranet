@@ -66,8 +66,8 @@ class CargaServiciosController extends Controller
             while (($emapData = fgetcsv($servicios_file, 10000, ",")) !== FALSE){
                 
                 $cont_fila++;
-                echo("/n ".$cont_fila. date("Y-m-d H:i:s"));
-                if($cont_fila > 1)
+                echo("\n ----- ".$cont_fila. " nueva fila ----- ". date("Y-m-d H:i:s"));
+                if($cont_fila < 2)
                 {   
                     
                     //Verificar si el servicio existe en nuestra bd
@@ -75,11 +75,14 @@ class CargaServiciosController extends Controller
                     $id_servicio = $emapData[0];
                     //if($id_servicio == '538433')
                     //dd($id_servicio,(int)$id_servicio,!DB::table('Servicio')->where('IdServicio',$id_servicio)->exists(),!DB::table('Servicio')->where('IdServicio',(int)$id_servicio)->exists());
+                    echo("\n ".$cont_fila. " Query existe el servicio inicio ". date("Y-m-d H:i:s"));
                     if(!DB::table('Servicio')->where('IdServicio',$id_servicio)->exists()){
                         
+                        echo("\n ".$cont_fila. " Query existe el servicio fin ". date("Y-m-d H:i:s"));
+
                         date_default_timezone_set('America/Lima');
                         setlocale(LC_ALL,"es_ES@euro","es_ES","esp");
-                        /*
+                        
                         $fecha_carga = date("Y-m-d H:i:s");
                         
                         $esContado = false;
@@ -132,12 +135,15 @@ class CargaServiciosController extends Controller
                         //handle Cliente
                         $id_cliente_xls = $emapData[4];
                         $nombre_cliente_xls = trim($emapData[5]);
-
+                        
                         $cliente = DB::table('Cliente')->where('IdCliente',$id_cliente_xls);
+                        echo("\n ".$cont_fila. " Query existe el cliente inicio ". date("Y-m-d H:i:s"));
                         if($cliente->exists())
                         {  
-                        
+                            echo("\n ".$cont_fila. " Query existe el cliente fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el cliente inicio ". date("Y-m-d H:i:s"));
                             $cliente_obj = $cliente->first();
+                            echo("\n ".$cont_fila. " Query obtener el cliente fin ". date("Y-m-d H:i:s"));
                             $id_cliente = $cliente_obj->IdClienteSistema;
                         }
                         else{
@@ -148,8 +154,12 @@ class CargaServiciosController extends Controller
                         $id_usuario_xls = $emapData[53];
                         $nombre_usuario_xls = trim($emapData[7]);
                         $usuario = DB::table('Usuario')->where('IdUsuario',$id_usuario_xls);
+                        echo("\n ".$cont_fila. " Query existe el usuario inicio ". date("Y-m-d H:i:s"));
                         if($usuario->exists()){
+                            echo("\n ".$cont_fila. " Query existe el usuario fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el usuario inicio ". date("Y-m-d H:i:s"));
                             $usuario_obj = $usuario->first();
+                            echo("\n ".$cont_fila. " Query obtener el usuario fin ". date("Y-m-d H:i:s"));
                             $id_usuario  = $usuario_obj->IdUsuarioSistema;
                         }
                         else{
@@ -158,8 +168,13 @@ class CargaServiciosController extends Controller
                         //handle tipo servicio
                         $desc_tipo_servicio_xls = trim($emapData[19]);
                         $tipo_servicio = DB::table('TipoServicio')->where('DescTipoServicio',$desc_tipo_servicio_xls);
+                        echo("\n ".$cont_fila. " Query existe el tipo_servicio inicio ". date("Y-m-d H:i:s"));
                         if($tipo_servicio->exists()){
+                            echo("\n ".$cont_fila. " Query existe el tipo_servicio fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el tipo_servicio inicio ". date("Y-m-d H:i:s"));
                             $tipo_servicio_obj = $tipo_servicio->first();
+                            echo("\n ".$cont_fila. " Query obtener el tipo_servicio fin ". date("Y-m-d H:i:s"));
+                            
                             $id_tipo_servicio  = $tipo_servicio_obj->IdTipoServicioSistema;
                         }
                         else{
@@ -168,8 +183,15 @@ class CargaServiciosController extends Controller
                         //handle tipo auto
                         $desc_tipo_auto_xls = trim($emapData[20]);
                         $tipo_auto = DB::table('TipoAuto')->where('DescTipoAuto',$desc_tipo_auto_xls);
+                        echo("\n ".$cont_fila. " Query existe el tipo_auto inicio ". date("Y-m-d H:i:s"));
+                        
                         if($tipo_auto->exists()){
+                            echo("\n ".$cont_fila. " Query existe el tipo_auto fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el tipo_auto inicio ". date("Y-m-d H:i:s"));
+                            
                             $tipo_auto_obj = $tipo_auto->first();
+                            echo("\n ".$cont_fila. " Query obtener el tipo_auto fin ". date("Y-m-d H:i:s"));
+                            
                             $id_tipo_auto  = $tipo_auto_obj->IdTipoAutoSistema;
                         }
                         else{
@@ -183,8 +205,15 @@ class CargaServiciosController extends Controller
                         $cod_planilla_conductor_xls = trim($emapData[18]);
                         //vehiculo
                         $vehiculo = DB::table('Vehiculo') ->where('IdVehiculo',$id_vehiculo_xls);
+                        echo("\n ".$cont_fila. " Query existe el vehiculo inicio ". date("Y-m-d H:i:s"));
+                        
                         if($vehiculo->exists()){
+                            echo("\n ".$cont_fila. " Query existe el vehiculo fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el vehicuo inicio ". date("Y-m-d H:i:s"));
+                            
                             $vehiculo_obj = $vehiculo->first();
+                            echo("\n ".$cont_fila. " Query obtener el vehicuo fin ". date("Y-m-d H:i:s"));
+                            
                             $id_vehiculo = $vehiculo_obj->IdVehiculoSistema;
                         }
                         else{
@@ -194,9 +223,15 @@ class CargaServiciosController extends Controller
 
 
                         //conductor
+                        
+                        
                         $conductor = DB::table('Conductor')->where('IdConductor',$id_conductor_xls);
+                        echo("\n ".$cont_fila. " Query existe el Conductor inicio ". date("Y-m-d H:i:s"));
                         if($conductor->exists()){
+                            echo("\n ".$cont_fila. " Query existe el Conductor fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el Conductor inicio ". date("Y-m-d H:i:s"));
                             $conductor_obj = $conductor->first();
+                            echo("\n ".$cont_fila. " Query existe el Conductor fin ". date("Y-m-d H:i:s"));
                             $id_conductor = $conductor_obj->IdConductorSistema;
                         }
                         else{
@@ -212,7 +247,7 @@ class CargaServiciosController extends Controller
                                     $id_tipo_conductor = 5;
                                 
                             }
-
+                            
                             $id_conductor = DB::table('Conductor')->insertGetId(['IdConductor'=> $id_conductor_xls,
                                                                                 'NombreConductor'=> $nombre_conductor_xls,
                                                                                 'IdVehiculo' => $id_vehiculo,
@@ -227,8 +262,12 @@ class CargaServiciosController extends Controller
                         $moneda_xls = trim($emapData[13]);
 
                         $representacion = DB::table('Moneda')->where('SimbMoneda',$moneda_xls);
+                        echo("\n ".$cont_fila. " Query existe el moneda inicio ". date("Y-m-d H:i:s"));
                         if($representacion->exists()){
+                            echo("\n ".$cont_fila. " Query existe el moneda fin ". date("Y-m-d H:i:s"));
+                            echo("\n ".$cont_fila. " Query obtener el moneda inicio ". date("Y-m-d H:i:s"));
                             $representacion_obj = $representacion->first();
+                            echo("\n ".$cont_fila. " Query existe el moneda fin ". date("Y-m-d H:i:s"));
                             $id_moneda = $representacion_obj->IdMonedaSistema;
                         }
                         else {
@@ -252,7 +291,9 @@ class CargaServiciosController extends Controller
 
                             $id_esCredito = 0;
                             //handle id empresa
+                            echo("\n ".$cont_fila. " Query obtener el Cliente inicio ". date("Y-m-d H:i:s"));
                             $cliente_obj_v = DB::table('Cliente')->where('IdClienteSistema',$id_cliente)->first();
+                            echo("\n ".$cont_fila. " Query obtener el Cliente fin ". date("Y-m-d H:i:s"));
                             if($cliente_obj_v->IdEmpresa != null  || $cliente_obj_v->IdEmpresa != '' || isset($cliente_obj_v->IdEmpresa) || $cliente_obj_v->IdEmpresa != 0 ){
                                 $id_empresa = $cliente_obj_v->IdEmpresa;
                             }
@@ -304,9 +345,10 @@ class CargaServiciosController extends Controller
                             'EsCredito' => $esContado?false:true
                         ];
                         //dd($servicios_val_arr);
+                        echo("\n ".$cont_fila. " Query insertar el servicio inicio ". date("Y-m-d H:i:s"));
+                        DB::table('Servicio')->insert($servicios_val_arr);        
+                        echo("\n ".$cont_fila. " Query existe el servicio fin ". date("Y-m-d H:i:s"));   
                         
-                        DB::table('Servicio')->insert($servicios_val_arr);           
-                        */
                         $cont++;
                         //dd('inserta?');
                     }
