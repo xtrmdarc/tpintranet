@@ -303,8 +303,8 @@ class CargaServiciosController extends Controller
                             //---
                         }   
 
-                        if($id_carga == 0)
-                        $id_carga = DB::table('Carga')->insertGetId(['FechaCarga'=>$fecha_carga]);
+                        // if($id_carga == 0)
+                        // $id_carga = DB::table('Carga')->insertGetId(['FechaCarga'=>'']);
                         
                         $servicios_val_arr = [
                             'IdServicio' => $id_servicio,
@@ -339,7 +339,7 @@ class CargaServiciosController extends Controller
                             'ServicioProcesado'=>false,
                             //NumFactura => ,
                             //IdFactura,
-                            'IdCarga' => $id_carga,
+                            //'IdCarga' => $id_carga,
                             'IdEmpresa'=>$id_empresa,
                             'EsContado' => $esContado?true:false,
                             'EsCredito' => $esContado?false:true
