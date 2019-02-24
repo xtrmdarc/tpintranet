@@ -51,7 +51,7 @@ class CargaServiciosController extends Controller
         }
     }
     
-    public function cargarServiciosPrincipal(Request $request){
+    public function cargarServiciosPrincipal_aux(Request $request){
         $response = new \stdClass();
         try{
             //dd($request->file);
@@ -369,7 +369,7 @@ class CargaServiciosController extends Controller
                 
     }
 
-    public function cargarServiciosPrincipal_aux(Request $request){
+    public function cargarServiciosPrincipal(Request $request){
         $response = new \stdClass();
         try{
             //dd($request->file);
