@@ -22,7 +22,7 @@
     <link href="{{URL::to('build/css/custom.min.css')}}" rel="stylesheet">
   </head>
 
-  <body class="login">
+  <body class="Login">
     <div>
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
@@ -30,16 +30,17 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form type="POST" action="/Login">
+              {{ csrf_field() }}
               <h1>Iniciar Sesión</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Usuario" required="" />
+                <input type="text" class="form-control" name="user" placeholder="Usuario" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Contraseña" required="" />
+                <input type="password" class="form-control" name="pass" placeholder="Contraseña" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Ingresar</a>
+                <input id="send" type="submit" class="btn btn-success" value="Enviar"/>
                 <a class="reset_pass" href="#">¿Olvidaste tu contraseña?</a>
               </div>
 

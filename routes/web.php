@@ -20,7 +20,9 @@ Route::get('/Administracion', 'Application\Administracion\ControlFacturacionCont
 
 Route::get('/Produccion','Application\Produccion\ControlProduccionController@index');
 
+//Login
 Route::get('/InicioSesion','Application\Sistema\InicioSesionController@index');
+Route::post('/Login','Application\Sistema\InicioSesionController@Login');
 
 //Usuario
 Route::get('/EditorUsuario','Application\Sistema\AjusteUsuariosController@editar_usuario');
@@ -53,6 +55,8 @@ Route::prefix('Turnos')->group(function()
 
 }
 );
+
+
 
 
 
