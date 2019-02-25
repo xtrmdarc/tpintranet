@@ -57,16 +57,18 @@ class ClientesController extends Controller
                             ->update([
                                 'NombreCliente'=> $data['nombre_contumov'],
                                 'IdCliente'=>$data['id_contumov'],
-                                'IdEmpresa'=>$data['slc_tipo_conductor'],
-                                'RUC'=>$data['ruc']
+                                'IdEmpresa'=>$data['slc_empresa'],
+                                'RUC'=>$data['ruc'],
+                                'EsCredito'=>$data['slc_es_credito']
                             ]);
         }
         else{
             DB::table('Cliente')->insert([
                 'NombreCliente'=> $data['nombre_contumov'],
                 'IdCliente'=>$data['id_contumov'],
-                'IdEmpresa'=>$data['slc_tipo_conductor'],
-                'RUC'=>$data['ruc']
+                'IdEmpresa'=>$data['slc_empresa'],
+                'RUC'=>$data['ruc'],
+                'EsCredito'=>$data['slc_es_credito']
             ]);
         }
         
