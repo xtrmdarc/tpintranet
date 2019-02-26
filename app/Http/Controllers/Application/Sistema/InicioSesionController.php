@@ -37,7 +37,7 @@ class InicioSesionController extends Controller
             return view('iniciosesion')->with($datos);
         }
         
-    return ;
+        return ;
     }
 
 }

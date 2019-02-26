@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -30,14 +31,14 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form type="POST" action="/Login">
-              {{ csrf_field() }}
+            <form  action="/Login" method="POST">
+              @csrf
               <h1>Iniciar Sesión</h1>
               <div>
-                <input type="text" class="form-control" name="user" placeholder="Usuario" required="" />
+                <input type="text" class="form-control" name="user" placeholder="Usuario" required/>
               </div>
               <div>
-                <input type="password" class="form-control" name="pass" placeholder="Contraseña" required="" />
+                <input type="password" class="form-control" name="pass" placeholder="Contraseña" required />
               </div>
               <div>
                 <input id="send" type="submit" class="btn btn-success" value="Enviar"/>
@@ -56,7 +57,7 @@
 
                 <div>
                   {{-- <h1>Taxi Puntual</h1>  --}}
-                  <p>©2018 All Rights Reserved. Privacy and Terms</p>
+                  <p>©2019 All Rights Reserved. Privacy and Terms</p>
                 </div>
               </div>
             </form>
