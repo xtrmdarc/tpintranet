@@ -15,7 +15,7 @@ include 'Application/sistema_routes.php';
 include 'Application/administracion_routes.php';
 include 'Application/produccion_routes.php';
 include 'Application/gerencia_routes.php';
-    
+include 'Landing/landing_routes.php';
 Route::get('/Administracion', 'Application\Administracion\ControlFacturacionController@index' );
 
 Route::get('/Produccion','Application\Produccion\ControlProduccionController@index');
