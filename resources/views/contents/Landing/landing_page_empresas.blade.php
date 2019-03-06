@@ -70,7 +70,7 @@
                     <h2 class="mt-4" style="font-weight:300;font-size:2rem">
                         Movilidad privada para las 
                         empresas <br> que mueven
-                        la industría.
+                        la industria.
                     </h2>
                     <div class="visible-sm mt-5">
                         &nbsp;
