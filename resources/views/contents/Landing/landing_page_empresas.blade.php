@@ -27,7 +27,7 @@
         margin-top: 20px;
     }
     .why-us img{
-        width:80px;
+        /* width:80px; */
     }
     .why-us p{
         color: white;
@@ -42,8 +42,8 @@
         align-items: center;
     }
     .logos div{
-        padding-top:15px;
-        padding-bottom: 15px;
+        padding-top:25px;
+        padding-bottom: 25px;
     }
     #above-the-fold{
         background-image: url('Landing/img/background-atf.png')    
@@ -125,10 +125,21 @@
 
             </div>
         </div>
+        <div class="row pt-5">
+            <div class="col-md-6">
+                <h2  style="font-weight:800;font-size:2.5rem;margin-top:0.7em">
+                    ESTAMOS CERTIFICADOS POR <br>
+                    BUREAU VERITAS
+                </h2>
+            </div>
+            <div class="col-md-6" style="padding-right:0px !important;">
+                <img class="img-fluid" style="float:right;" src="{{URL::to('Landing/img/bureau_veritas_logo.png')}} " alt="bureau veritas logo" >
+            </div>
+        </div>
         {{-- Why us ? --}}
         <div class="row bg-secondary p-4 pt-5 why-us" style="color:white;">
             <div class="col-md-6">
-                <h2  style="font-weight:800;font-size:2.5rem">
+                <h2  style="font-weight:800;font-size:2.5rem;">
                     ¿POR QUÉ LAS EMPRESAS <br> NOS PREFIEREN?
                 </h2>
             </div>
@@ -159,11 +170,11 @@
             </div>
         </div>
         {{-- Trust --}}
-        <div class="row bg-secondary p-4 pt-5 " style="color:white;">
+        <div class="row bg-secondary p-5 pt-5 " style="color:white;">
             <div class="col-sm-12">
                 <h2 class="text-center" style="font-weight:800;font-size:2.5rem">ELLOS ESTAN CONFIANDO EN NOSOTROS</h2>
             </div>
-            <div class="col-sm-12 pt-5">
+            <div class="col-sm-12 p-5">
                 <div class="row text-center logos">
                     <div class="col-sm-3 mx-auto">
                         <img src="{{URL::to('Landing/img/everis_logo.png')}}" class="filter-white img-fluid" alt="everis_logo">
@@ -177,7 +188,18 @@
                     <div class="col-sm-3">
                         <img src="{{URL::to('Landing/img/anixter_logo.png')}}"  class="filter-white img-fluid" alt="anixter_logo">
                     </div>
-    
+                    <div class="col-sm-3 mx-auto">
+                        <img src="{{URL::to('Landing/img/gss_logo.png')}}" class="filter-white img-fluid" alt="everis_logo">
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="{{URL::to('Landing/img/sider_logo.png')}}"  class="filter-white img-fluid" alt="pcent_logo">
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="{{URL::to('Landing/img/praxair_logo.png')}}" class="filter-white img-fluid"  alt="hym_logo">
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="{{URL::to('Landing/img/sony_logo.png')}}"  class="filter-white img-fluid" alt="anixter_logo">
+                    </div>
                 </div>
             </div>
             
