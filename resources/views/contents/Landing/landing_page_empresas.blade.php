@@ -6,7 +6,31 @@
         font-family: 'Open Sans', sans-serif;
        
     }
-
+    #menu-items{
+        display: inline-flex;
+    }
+    #menu-items ul{
+        list-style-type: none;
+        float: right;
+        display: block;
+        width: 100%;
+        text-align: right;
+        padding: 0px;
+        
+    }
+    #menu-items li a{
+        display: inline;
+        font-weight: initial;
+        color: #163410;
+        text-decoration: none;
+        
+    }
+    #menu-items li {
+        display: inline;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+    
     @media (min-width: 768px){
         .visible-sm{
             display:block;
@@ -16,9 +40,24 @@
         .visible-sm{
             display:none;
         }
+        #logo_tp{
+           margin-right: auto;
+           margin-left: auto;
+           display: block;
+           margin-bottom: 30px;
+        }
+        #menu-items ul{
+            text-align: center;
+        }
     }
     .bg-secondary{
         background-color: #163410 !important;
+    }
+    .contacto h3 {
+        font-size: 1.2rem;
+        color: white;
+        font-weight: 800;
+        margin-top: 20px;
     }
     .why-us h3{
         font-size: 1.2rem;
@@ -56,8 +95,22 @@
         <div class="row">
             <div class="col-sm-12 pt-2">
                 <div class="nav-bar">
-                    <img src="{{URL::to('Landing/img/tp_logo.png')}} " alt="logo_taxi_puntual" width="100px">
+                    <div class="row">
+                        <div class="col-sm-6 ">
+                            <img id="logo_tp" src="{{URL::to('Landing/img/tp_logo.png')}} " alt="logo_taxi_puntual" width="100px">
+                        </div>
+                        <div id="menu-items" class="col-sm-6 pr-4 ">
+                            <ul  >
+                                <li class="nav-item"><a href="#beneficios">Beneficios</a> </li>
+                                <li class="nav-item"><a href="#empresas">Empresas</a> </li>
+                                <li class="nav-item"><a href="#contacto">Contacto</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    
                 </div>  
+                
             </div>
         </div>    
         {{-- Main above the fold --}}
@@ -81,7 +134,7 @@
                 </div>
                 
             </div>
-            <div class="col-sm-10 col-md-5 col-lg-4 mx-auto" >
+            <div id="contacto_frm" class="col-sm-10 col-md-5 col-lg-4 mx-auto" >
                 <div class="col-sm-11 col-md-12 col-lg-12 text-center center-block mx-auto" style="align-items: center;" >
                     <div class="card" style="padding:1em;background-color:#373737;color:white;" >
                         <p ><span style="font-weight:700" > ¿Quieres que transportemos a tu 
@@ -137,7 +190,7 @@
             </div>
         </div>
         {{-- Why us ? --}}
-        <div class="row bg-secondary p-4 pt-5 why-us" style="color:white;">
+        <div id="beneficios" class="row bg-secondary p-4 pt-5 why-us" style="color:white;">
             <div class="col-md-6">
                 <h2  style="font-weight:800;font-size:2.5rem;">
                     ¿POR QUÉ LAS EMPRESAS <br> NOS PREFIEREN?
@@ -169,8 +222,9 @@
                 </div>
             </div>
         </div>
+
         {{-- Trust --}}
-        <div class="row bg-secondary p-5 pt-5 " style="color:white;">
+        <div id="empresas" class="row bg-secondary p-5 pt-5 " style="color:white;">
             <div class="col-sm-12">
                 <h2 class="text-center" style="font-weight:800;font-size:2.5rem">ELLOS ESTAN CONFIANDO EN NOSOTROS</h2>
             </div>
@@ -204,6 +258,32 @@
             </div>
             
             
+        </div>
+
+        {{-- Testimonio y contacto --}}
+        <div id="contacto" class="row p-5 pt-5 contacto" style="background-color:black;color:white;">
+            <div class="col-md-6" style="margin-bottom:20px;">
+                <h2  style="font-weight:800;font-size:2.5rem;">
+                    TESTIMONIO
+                </h2>
+                <h2>&nbsp;</h2>
+                <iframe width="400" height="235"  class="img-fluid" src="https://www.youtube.com/embed/ExOqVCVo6o0?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="col-md-4">
+                <h2  style="font-weight:800;font-size:2.5rem;">
+                    INFORMACIÓN DE CONTACTO
+                </h2>
+                <div>
+                    <h3>CORREO</h3>
+                    <p>marketing@taxipuntual.com</p>
+                </div>
+                <div>
+                    <h3>DIRECCIÓN</h3>
+                    <p>Castilla La Nueva Mz. N Lte. 11 <br>
+                        Urb. La Capilla, La Molina</p>
+                </div>
+                <a href="#contacto_frm" class="btn btn-block btn-primary border-0" value="SOLICITAR"   style="background-color:#157802">CONTACTAR</a>
+            </div>
         </div>
     </div>
     
