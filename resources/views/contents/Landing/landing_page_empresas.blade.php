@@ -294,6 +294,8 @@
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script>
         $('#form-solicitud').on('submit',function(e){
+
+            fbq('track','SubmitApplication');
             e.preventDefault();
             e.stopImmediatePropagation();
             let nombre_contacto = $('#nombre').val();
