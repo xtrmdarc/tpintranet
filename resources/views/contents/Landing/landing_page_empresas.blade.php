@@ -166,7 +166,7 @@
                             </div>
                             
                             <div class="form-group">
-                                <input id="btn_submit" type="submit" class="btn btn-block btn-primary border-0" value="SOLICITAR"   style="background-color:#157802">
+                                <input id="btn_submit" type="submit" class="btn btn-block btn-primary border-0" value="MÁS INFORMACIÓN"   style="background-color:#157802">
                             </div>
                             <p  id="gracias" style="display:none"> Gracias! Nos pondremos en contacto contigo.</p>
                         </form>
