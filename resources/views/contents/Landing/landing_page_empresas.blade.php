@@ -275,7 +275,7 @@
                 </h2>
                 <div>
                     <h3>CORREO</h3>
-                    <p>marketing@taxipuntual.com</p>
+                    <p>ventas@taxipuntual.com</p>
                 </div>
                 <div>
                     <h3>DIRECCIÓN</h3>
@@ -308,8 +308,8 @@
             $('#btn_submit').prop('disabled',true);
             Email.send({
                 SecureToken:"94a1538d-4e77-4474-9624-0412e613cd80",
-                To : 'marketing@taxipuntual.com',
-                From : "marketing@taxipuntual.com",
+                To : 'ventas@taxipuntual.com',
+                From : "ventas@taxipuntual.com",
                 Subject : "Publicidad. 1 Lead. Solicitud de Tarifario por Landing Page.",
                 Body : `
                 <style>
