@@ -309,7 +309,7 @@
             Email.send({
                 SecureToken:"94a1538d-4e77-4474-9624-0412e613cd80",
                 To : 'ventas@taxipuntual.com',
-                From : "ventas@taxipuntual.com",
+                From : "marketing@taxipuntual.com",
                 Subject : "Publicidad. 1 Lead. Solicitud de Tarifario por Landing Page.",
                 Body : `
                 <style>
